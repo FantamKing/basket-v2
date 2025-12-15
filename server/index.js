@@ -5,7 +5,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const path = require('path');
 
-dotenv.config();
+dotenv.config({ path: path.join(__dirname, '.env') });
 
 const Connection = require('./database/db.js');
 const Routes = require('./routes/route.js');
@@ -50,6 +50,11 @@ app.use('/api/admin', adminRoutes);
 // Basic API info route
 app.get('/', (req, res) => {
   res.json({ message: 'Basket Grocery API is running', version: '1.0.0' });
+});
+
+// Health check endpoint for Render
+app.get('/healthz', (req, res) => {
+  res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
 const server = app.listen(PORT, () => {

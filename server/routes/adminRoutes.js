@@ -9,13 +9,41 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const multer = require('multer');
 const path = require('path');
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const cloudinary = require('cloudinary').v2;
 
-// File upload
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => cb(null, path.resolve(__dirname, '../uploads')),
-    filename: (req, file, cb) => cb(null, Date.now() + path.extname(file.originalname))
+// Cloudinary configuration
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
 });
-const upload = multer({ storage });
+
+// Cloudinary storage with error handling
+const storage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: async (req, file) => {
+        console.log('Uploading file to Cloudinary:', file.originalname);
+        return {
+            folder: 'basket-categories',
+            allowed_formats: ['jpg', 'png', 'jpeg', 'gif', 'webp'],
+            transformation: [{ width: 500, height: 500, crop: 'limit' }],
+            public_id: `category_${Date.now()}`
+        };
+    }
+});
+
+const upload = multer({
+    storage,
+    limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
+    fileFilter: (req, file, cb) => {
+        if (file.mimetype.startsWith('image/')) {
+            cb(null, true);
+        } else {
+            cb(new Error('Only image files are allowed'), false);
+        }
+    }
+});
 
 // Verify super admin
 const verifySuperAdmin = (req, res, next) => {
@@ -181,9 +209,10 @@ router.post('/login', async (req, res) => {
         }
 
         let isValidPassword = false;
-        if (admin.password.startsWith('$2')) {
-            isValidPassword = await bcrypt.compare(password, admin.password);
-        } else {
+        try {
+            isValidPassword = await admin.comparePassword(password);
+        } catch (error) {
+            // Fallback for plain text passwords (for migration)
             isValidPassword = password === admin.password;
         }
 
@@ -218,25 +247,26 @@ router.post('/login', async (req, res) => {
 router.post('/products', verifyAdmin, upload.single('image'), async (req, res) => {
     try {
         const { name, description, price, originalPrice, category, stock, unit, discount, isFeatured } = req.body;
-        
+
         const product = new Product({
             name,
             description,
             price: parseFloat(price),
             originalPrice: parseFloat(originalPrice),
             category,
-            image: req.file ? `/uploads/${req.file.filename}` : '',
+            image: req.file ? req.file.path : '', // Cloudinary URL
             stock: parseInt(stock),
             unit,
             discount: parseFloat(discount) || 0,
             isFeatured: isFeatured === 'true'
         });
-        
+
         await product.save();
         await product.populate('category');
-        
+
         res.status(201).json(product);
     } catch (error) {
+        console.error('Error saving product:', error);
         res.status(500).json({ message: error.message });
     }
 });
@@ -259,7 +289,7 @@ router.put('/products/:id', verifyAdmin, upload.single('image'), async (req, res
         };
         
         if (req.file) {
-            updateData.image = `/uploads/${req.file.filename}`;
+            updateData.image = req.file.path; // Cloudinary URL
         }
         
         const product = await Product.findByIdAndUpdate(req.params.id, updateData, { new: true }).populate('category');
@@ -303,15 +333,19 @@ router.get('/products', verifyAdmin, async (req, res) => {
 router.post('/categories', verifyAdmin, upload.single('image'), async (req, res) => {
     try {
         const { name, description } = req.body;
-        
+
+        console.log('Creating category:', name);
+        console.log('File uploaded:', req.file);
+
         const category = new Category({
             name,
             description,
-            image: req.file ? `/uploads/${req.file.filename}` : ''
+            image: req.file ? req.file.path : '' // Cloudinary returns the URL in req.file.path
         });
-        
+
         await category.save();
-        
+
+        console.log('Category saved successfully:', category._id);
         res.status(201).json(category);
     } catch (error) {
         console.error('Error saving category:', error);
@@ -323,21 +357,23 @@ router.post('/categories', verifyAdmin, upload.single('image'), async (req, res)
 router.put('/categories/:id', verifyAdmin, upload.single('image'), async (req, res) => {
     try {
         const { name, description } = req.body;
-        
+
         const updateData = { name, description };
-        
+
         if (req.file) {
-            updateData.image = `/uploads/${req.file.filename}`;
+            console.log('Updating category image:', req.file.path);
+            updateData.image = req.file.path; // Cloudinary URL
         }
-        
+
         const category = await Category.findByIdAndUpdate(req.params.id, updateData, { new: true });
-        
+
         if (!category) {
             return res.status(404).json({ message: 'Category not found' });
         }
-        
+
         res.json(category);
     } catch (error) {
+        console.error('Error updating category:', error);
         res.status(500).json({ message: error.message });
     }
 });
