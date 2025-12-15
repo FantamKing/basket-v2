@@ -260,20 +260,19 @@ const ManageCategories = () => {
       // If there's an image file, upload directly to Cloudinary first
       let imageUrl = '';
       if (image) {
-        const signResp = await axios.get('/admin/sign?folder=basket-categories', { headers: { Authorization: `Bearer ${token}` } });
-        const { signature, timestamp, api_key, cloud_name, folder } = signResp.data;
         const cloudForm = new FormData();
         cloudForm.append('file', image);
-        cloudForm.append('api_key', api_key);
-        cloudForm.append('timestamp', timestamp);
-        cloudForm.append('signature', signature);
-        cloudForm.append('folder', folder);
+        cloudForm.append('upload_preset', 'basket_unsigned');
+        cloudForm.append('folder', 'basket-categories');
 
-        const res = await fetch(`https://api.cloudinary.com/v1_1/${cloud_name}/auto/upload`, {
+        const res = await fetch(`https://api.cloudinary.com/v1_1/dk57ostu8/upload`, {
           method: 'POST',
           body: cloudForm
         });
         const data = await res.json();
+        if (!res.ok) {
+          throw new Error(data.error?.message || 'Upload failed');
+        }
         imageUrl = data.secure_url;
       }
 

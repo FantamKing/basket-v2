@@ -238,21 +238,19 @@ const AddProduct = () => {
 
       // Upload image directly to Cloudinary from the client
       const uploadImageToCloudinary = async (file) => {
-        const signResp = await axios.get('/admin/sign?folder=basket-products', { headers: { Authorization: `Bearer ${token}` } });
-        const { signature, timestamp, api_key, cloud_name, folder } = signResp.data;
-
         const cloudForm = new FormData();
         cloudForm.append('file', file);
-        cloudForm.append('api_key', api_key);
-        cloudForm.append('timestamp', timestamp);
-        cloudForm.append('signature', signature);
-        cloudForm.append('folder', folder);
+        cloudForm.append('upload_preset', 'basket_unsigned');
+        cloudForm.append('folder', 'basket-products');
 
-        const res = await fetch(`https://api.cloudinary.com/v1_1/${cloud_name}/auto/upload`, {
+        const res = await fetch(`https://api.cloudinary.com/v1_1/dk57ostu8/upload`, {
           method: 'POST',
           body: cloudForm
         });
         const data = await res.json();
+        if (!res.ok) {
+          throw new Error(data.error?.message || 'Upload failed');
+        }
         return data.secure_url;
       };
 
