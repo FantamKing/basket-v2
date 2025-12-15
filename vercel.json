@@ -4,7 +4,3 @@
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
-{ "source": "/(.)", "destination": "/index.html" }
-]
-}
->>>>>>> dfde581070d10f56318e88fc62b2ab7cefb16f45
