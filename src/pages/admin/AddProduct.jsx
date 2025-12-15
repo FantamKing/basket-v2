@@ -235,24 +235,38 @@ const AddProduct = () => {
 
     try {
       const token = localStorage.getItem('adminToken');
-      const formDataToSend = new FormData();
-      
-      // Append form data
-      Object.keys(formData).forEach(key => {
-        formDataToSend.append(key, formData[key]);
-      });
-      
-      // Append image
-      formDataToSend.append('image', image);
+
+      // Upload image directly to Cloudinary from the client
+      const uploadImageToCloudinary = async (file) => {
+        const signResp = await axios.get('/admin/sign', { headers: { Authorization: `Bearer ${token}` } });
+        const { signature, timestamp, api_key, cloud_name } = signResp.data;
+
+        const cloudForm = new FormData();
+        cloudForm.append('file', file);
+        cloudForm.append('api_key', api_key);
+        cloudForm.append('timestamp', timestamp);
+        cloudForm.append('signature', signature);
+        cloudForm.append('folder', 'basket-products');
+
+        const res = await fetch(`https://api.cloudinary.com/v1_1/${cloud_name}/auto/upload`, {
+          method: 'POST',
+          body: cloudForm
+        });
+        const data = await res.json();
+        return data.secure_url;
+      };
+
+      const imageUrl = await uploadImageToCloudinary(image);
+
+      const payload = { ...formData, image: imageUrl };
 
       const config = {
         headers: {
-          'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`
         }
       };
 
-      await axios.post('/admin/products', formDataToSend, config);
+      await axios.post('/admin/products', payload, config);
 
       Swal.fire({
         icon: 'success',
