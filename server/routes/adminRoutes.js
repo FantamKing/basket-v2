@@ -228,8 +228,7 @@ router.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        git add .
-        git commit -m "Add God admin role with full control over admins"        console.log('Login attempt for email:', email);
+        console.log('Login attempt for email:', email);
 
         if (!email || !password) {
             return res.status(400).json({ message: 'Email and password are required' });
