@@ -156,7 +156,7 @@ const ManageOrders = () => {
   const handleStatusChange = async (orderId, newStatus) => {
     try {
       const token = localStorage.getItem('adminToken');
-      await axios.put(`/api/admin/orders/${orderId}`, { status: newStatus }, {
+      await axios.put(`/admin/orders/${orderId}`, { status: newStatus }, {
         headers: { Authorization: `Bearer ${token}` }
       });
 
@@ -191,7 +191,7 @@ const ManageOrders = () => {
     if (result.isConfirmed) {
       try {
         const token = localStorage.getItem('adminToken');
-        await axios.delete(`/api/admin/orders/${orderId}`, {
+        await axios.delete(`/admin/orders/${orderId}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
 
