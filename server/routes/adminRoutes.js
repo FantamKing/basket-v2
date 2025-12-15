@@ -252,6 +252,28 @@ router.post('/login', async (req, res) => {
     }
 });
 
+// Temporary route to reset admin password (remove after use)
+router.post('/reset-password', async (req, res) => {
+    try {
+        const { email, newPassword } = req.body;
+        if (!email || !newPassword) {
+            return res.status(400).json({ message: 'Email and newPassword required' });
+        }
+
+        const admin = await Admin.findOne({ email });
+        if (!admin) {
+            return res.status(404).json({ message: 'Admin not found' });
+        }
+
+        admin.password = newPassword; // Will be hashed by pre-save
+        await admin.save();
+
+        res.json({ message: 'Password reset successfully' });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
 // Provide Cloudinary signature for client-side direct uploads
 router.get('/sign', verifyAdmin, (req, res) => {
     try {
