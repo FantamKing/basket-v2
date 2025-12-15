@@ -14,11 +14,14 @@ const ManageAdmins = () => {
     password: '',
     role: 'admin',
     permissions: ['manage_products', 'manage_categories'],
+    tags: [],
     isActive: true
   });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [currentAdmin, setCurrentAdmin] = useState(null);
+  const [changingPasswordFor, setChangingPasswordFor] = useState(null);
+  const [newPassword, setNewPassword] = useState('');
 
   useEffect(() => {
     const adminData = localStorage.getItem('admin');
@@ -60,6 +63,7 @@ const ManageAdmins = () => {
       password: '', // Don't prefill password
       role: admin.role,
       permissions: Array.isArray(admin.permissions) ? admin.permissions : [],
+      tags: Array.isArray(admin.tags) ? admin.tags : [],
       isActive: admin.isActive
     });
     setShowForm(true);
@@ -78,6 +82,22 @@ const ManageAdmins = () => {
       fetchAdmins();
     } catch (error) {
       setError('Failed to delete admin');
+    }
+  };
+
+  const handleChangePassword = async (adminId) => {
+    const password = prompt('Enter new password:');
+    if (!password) return;
+
+    try {
+      await axios.put(`/api/admin/admins/${adminId}/password`, { newPassword: password }, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('adminToken')}`
+        }
+      });
+      setSuccess('Password changed successfully');
+    } catch (error) {
+      setError('Failed to change password');
     }
   };
 
@@ -103,7 +123,7 @@ const ManageAdmins = () => {
         });
         setSuccess('Admin created successfully');
       }
-      setFormData({ username: '', email: '', password: '', role: 'admin', permissions: ['manage_products', 'manage_categories'], isActive: true });
+      setFormData({ username: '', email: '', password: '', role: 'admin', permissions: ['manage_products', 'manage_categories'], tags: [], isActive: true });
       setShowForm(false);
       setEditingAdmin(null);
       fetchAdmins(); // Refresh the list
@@ -154,7 +174,7 @@ const ManageAdmins = () => {
                 />
               </div>
             )}
-            {currentAdmin?.role === 'super_admin' && (
+            {(currentAdmin?.role === 'super_admin' || currentAdmin?.role === 'god') && (
               <>
                 <div className="form-group">
                   <label>Role</label>
@@ -165,12 +185,13 @@ const ManageAdmins = () => {
                   >
                     <option value="admin">Admin</option>
                     <option value="super_admin">Super Admin</option>
+                    <option value="god">God</option>
                   </select>
                 </div>
                 <div className="form-group">
                   <label>Permissions</label>
                   <div className="permissions">
-                    {['manage_products', 'manage_categories', 'manage_admins', 'view_reports'].map(perm => (
+                    {['manage_products', 'manage_categories', 'manage_admins', 'view_reports', 'manage_admins_passwords', 'manage_admins_roles'].map(perm => (
                       <label key={perm}>
                         <input
                           type="checkbox"
@@ -182,22 +203,22 @@ const ManageAdmins = () => {
                             setFormData({ ...formData, permissions: newPerms });
                           }}
                         />
-                        {perm.replace('_', ' ')}
+                        {perm.replace(/_/g, ' ')}
                       </label>
                     ))}
                   </div>
                 </div>
                 <div className="form-group">
-                  <label>
-                    <input
-                      type="checkbox"
-                      name="isActive"
-                      checked={formData.isActive}
-                      onChange={(e) => setFormData({ ...formData, isActive: e.target.checked })}
-                    />
-                    Active
-                  </label>
+                  <label>Tags (comma separated)</label>
+                  <input
+                    type="text"
+                    name="tags"
+                    value={formData.tags.join(', ')}
+                    onChange={(e) => setFormData({ ...formData, tags: e.target.value.split(',').map(tag => tag.trim()).filter(tag => tag) })}
+                    placeholder="e.g., Tech Support, Vendor"
+                  />
                 </div>
+                <div className="form-group">
               </>
             )}
             <button type="submit" className="submit-btn">{editingAdmin ? 'Update Admin' : 'Create Admin'}</button>
@@ -236,8 +257,9 @@ const ManageAdmins = () => {
                 <th>Email</th>
                 <th>Role</th>
                 <th>Permissions</th>
+                <th>Tags</th>
                 <th>Status</th>
-                {currentAdmin?.role === 'super_admin' && <th>Actions</th>}
+                {(currentAdmin?.role === 'super_admin' || currentAdmin?.role === 'god') && <th>Actions</th>}
               </tr>
             </thead>
             <tbody>
@@ -249,7 +271,14 @@ const ManageAdmins = () => {
                   <td>
                     <div className="permissions-list">
                       {admin.permissions?.length > 0 ? admin.permissions.map(perm => (
-                        <span key={perm} className="permission-tag">{perm.replace('_', ' ')}</span>
+                        <span key={perm} className="permission-tag">{perm.replace(/_/g, ' ')}</span>
+                      )) : 'None'}
+                    </div>
+                  </td>
+                  <td>
+                    <div className="tags-list">
+                      {admin.tags?.length > 0 ? admin.tags.map(tag => (
+                        <span key={tag} className="tag">{tag}</span>
                       )) : 'None'}
                     </div>
                   </td>
@@ -258,9 +287,10 @@ const ManageAdmins = () => {
                       {admin.isActive ? 'Active' : 'Inactive'}
                     </span>
                   </td>
-                  {currentAdmin?.role === 'super_admin' && (
+                  {(currentAdmin?.role === 'super_admin' || currentAdmin?.role === 'god') && (
                     <td className="actions-cell">
                       <button onClick={() => handleEdit(admin)} className="edit-btn">Edit</button>
+                      <button onClick={() => handleChangePassword(admin._id)} className="password-btn">Change Password</button>
                       <button onClick={() => handleDelete(admin._id)} className="delete-btn">Delete</button>
                     </td>
                   )}
