@@ -246,7 +246,13 @@ router.post('/login', async (req, res) => {
 // Add product
 router.post('/products', verifyAdmin, upload.single('image'), async (req, res) => {
     try {
+        console.log('Product creation request received');
+        console.log('Body:', req.body);
+        console.log('File:', req.file);
+
         const { name, description, price, originalPrice, category, stock, unit, discount, isFeatured } = req.body;
+
+        console.log('Parsed data:', { name, description, price, category, stock, unit });
 
         const product = new Product({
             name,
@@ -261,9 +267,12 @@ router.post('/products', verifyAdmin, upload.single('image'), async (req, res) =
             isFeatured: isFeatured === 'true'
         });
 
+        console.log('Product object before save:', product);
+
         await product.save();
         await product.populate('category');
 
+        console.log('Product saved successfully:', product._id);
         res.status(201).json(product);
     } catch (error) {
         console.error('Error saving product:', error);
