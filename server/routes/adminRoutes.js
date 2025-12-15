@@ -201,11 +201,14 @@ router.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
 
+        console.log('Login attempt for email:', email);
+
         if (!email || !password) {
             return res.status(400).json({ message: 'Email and password are required' });
         }
 
         const admin = await Admin.findOne({ email });
+        console.log('Admin found:', !!admin);
         if (!admin) {
             return res.status(401).json({ message: 'Invalid credentials' });
         }
@@ -213,12 +216,15 @@ router.post('/login', async (req, res) => {
         let isValidPassword = false;
         try {
             isValidPassword = await admin.comparePassword(password);
+            console.log('Password valid via bcrypt:', isValidPassword);
         } catch (error) {
             // Fallback for plain text passwords (for migration)
             isValidPassword = password === admin.password;
+            console.log('Password valid via plain text fallback:', isValidPassword);
         }
 
         if (!isValidPassword) {
+            console.log('Invalid password for admin:', admin.email);
             return res.status(401).json({ message: 'Invalid credentials' });
         }
 
@@ -241,6 +247,7 @@ router.post('/login', async (req, res) => {
         });
 
     } catch (error) {
+        console.error('Login error:', error);
         res.status(500).json({ message: error.message });
     }
 });
