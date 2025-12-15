@@ -35,7 +35,7 @@ const storage = new CloudinaryStorage({
 
 const upload = multer({
     storage,
-    limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
+    limits: { fileSize: 10 * 1024 * 1024 }, // 10MB limit
     fileFilter: (req, file, cb) => {
         if (file.mimetype.startsWith('image/')) {
             cb(null, true);
@@ -276,6 +276,15 @@ router.post('/products', verifyAdmin, upload.single('image'), async (req, res) =
         res.status(201).json(product);
     } catch (error) {
         console.error('Error saving product:', error);
+
+        // Handle multer errors specifically
+        if (error.code === 'LIMIT_FILE_SIZE') {
+            return res.status(400).json({ message: 'File too large. Maximum size is 10MB.' });
+        }
+        if (error.name === 'MulterError') {
+            return res.status(400).json({ message: error.message });
+        }
+
         res.status(500).json({ message: error.message });
     }
 });
@@ -358,6 +367,15 @@ router.post('/categories', verifyAdmin, upload.single('image'), async (req, res)
         res.status(201).json(category);
     } catch (error) {
         console.error('Error saving category:', error);
+
+        // Handle multer errors specifically
+        if (error.code === 'LIMIT_FILE_SIZE') {
+            return res.status(400).json({ message: 'File too large. Maximum size is 10MB.' });
+        }
+        if (error.name === 'MulterError') {
+            return res.status(400).json({ message: error.message });
+        }
+
         res.status(500).json({ message: error.message });
     }
 });
