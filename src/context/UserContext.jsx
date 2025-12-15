@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../utils/axios';
 
 const UserContext = createContext();
 
@@ -19,7 +19,7 @@ export const UserProvider = ({ children }) => {
     const token = localStorage.getItem('userToken');
     if (token) {
       // Verify token and get user data
-      axios.get('/api/user/profile', {
+      axios.get('/user/profile', {
         headers: { Authorization: `Bearer ${token}` }
       })
       .then(response => {
@@ -38,7 +38,7 @@ export const UserProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const response = await axios.post('/api/login', { email, password });
+      const response = await axios.post('/login', { email, password });
       const { token, user: userData } = response.data;
       localStorage.setItem('userToken', token);
       setUser(userData);
@@ -50,7 +50,7 @@ export const UserProvider = ({ children }) => {
 
   const signup = async (userData) => {
     try {
-      await axios.post('/api/signup', userData);
+      await axios.post('/signup', userData);
       return { success: true };
     } catch (error) {
       return { success: false, message: error.response?.data?.message || 'Signup failed' };
@@ -65,7 +65,7 @@ export const UserProvider = ({ children }) => {
   const updateProfile = async (updatedData) => {
     try {
       const token = localStorage.getItem('userToken');
-      const response = await axios.put('/api/user/profile', updatedData, {
+      const response = await axios.put('/user/profile', updatedData, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setUser(response.data.user);

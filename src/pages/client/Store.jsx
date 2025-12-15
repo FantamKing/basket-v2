@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
-import axios from 'axios';
+import axios from '../../utils/axios';
 import ProductCard from '../../components/ProductCard.jsx';
 
 const StoreContainer = styled.div`
@@ -137,7 +137,7 @@ const Store = () => {
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('/api/products');
+      const response = await axios.get('/products');
       setProducts(response.data);
       setLoading(false);
     } catch (error) {
@@ -148,7 +148,7 @@ const Store = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get('/api/categories');
+      const response = await axios.get('/categories');
       setCategories(response.data);
     } catch (error) {
       console.error('Error fetching categories:', error);

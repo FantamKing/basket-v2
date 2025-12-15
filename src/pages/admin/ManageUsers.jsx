@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
+import axios from '../../utils/axios';
 import Swal from 'sweetalert2';
 
 const ManageUsersContainer = styled.div``;
@@ -214,7 +214,7 @@ const ManageUsers = () => {
   const fetchUsers = async () => {
     try {
       const token = localStorage.getItem('adminToken');
-      const response = await axios.get('/api/admin/users', {
+      const response = await axios.get('/admin/users', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setUsers(response.data);

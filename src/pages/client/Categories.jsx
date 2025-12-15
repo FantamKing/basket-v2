@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import axios from 'axios';
+import axios from '../../utils/axios';
 import ProductCard from '../../components/ProductCard.jsx';
 
 const CategoriesContainer = styled.div`
@@ -73,7 +73,7 @@ const Categories = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get('/api/categories');
+      const response = await axios.get('/categories');
       setCategories(response.data);
       
       // Fetch products for each category

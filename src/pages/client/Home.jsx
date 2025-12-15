@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../../utils/axios';
 import ProductCard from '../../components/ProductCard.jsx';
 import './Home.css';
 
@@ -19,8 +19,8 @@ const Home = () => {
     try {
       setError(null);
       const [featuredRes, categoriesRes] = await Promise.all([
-        axios.get('/api/products/featured').catch(() => ({ data: [] })),
-        axios.get('/api/categories').catch(() => ({ data: [] }))
+        axios.get('/products/featured').catch(() => ({ data: [] })),
+        axios.get('/categories').catch(() => ({ data: [] }))
       ]);
       setFeaturedProducts(featuredRes.data || []);
       setCategories(categoriesRes.data || []);

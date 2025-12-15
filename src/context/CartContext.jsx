@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../utils/axios';
 
 const CartContext = createContext();
 
@@ -80,7 +80,7 @@ export const CartProvider = ({ children }) => {
         quantity: item.quantity
       }));
 
-      const response = await axios.post('/api/order', {
+      const response = await axios.post('/order', {
         items,
         shippingAddress,
         paymentMethod

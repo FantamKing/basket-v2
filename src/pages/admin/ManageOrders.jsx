@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
+import axios from '../../utils/axios';
 import Swal from 'sweetalert2';
 
 const ManageOrdersContainer = styled.div``;
@@ -137,7 +137,7 @@ const ManageOrders = () => {
   const fetchOrders = async () => {
     try {
       const token = localStorage.getItem('adminToken');
-      const response = await axios.get('/api/admin/orders', {
+      const response = await axios.get('/admin/orders', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setOrders(response.data);

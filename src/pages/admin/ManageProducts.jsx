@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import axios from 'axios';
+import axios from '../../utils/axios';
 import Swal from 'sweetalert2';
 
 const ManageProductsContainer = styled.div``;
@@ -128,7 +128,7 @@ const ManageProducts = () => {
   const fetchProducts = async () => {
     try {
       const token = localStorage.getItem('adminToken');
-      const response = await axios.get('/api/admin/products', {
+      const response = await axios.get('/admin/products', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setProducts(response.data);
@@ -162,7 +162,7 @@ const ManageProducts = () => {
     if (result.isConfirmed) {
       try {
         const token = localStorage.getItem('adminToken');
-        await axios.delete(`/api/admin/products/${productId}`, {
+        await axios.delete(`/admin/products/${productId}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
 

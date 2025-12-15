@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../../utils/axios';
 import './ManageAdmins.css';
 import './ManageAdmins.css';
 
@@ -31,7 +31,7 @@ const ManageAdmins = () => {
   const fetchAdmins = async () => {
     try {
       // Assuming there's an endpoint to get all admins
-      const response = await axios.get('/api/admin/admins', {
+      const response = await axios.get('/admin/admins', {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('adminToken')}`
         }
@@ -96,7 +96,7 @@ const ManageAdmins = () => {
         });
         setSuccess('Admin updated successfully');
       } else {
-        response = await axios.post('/api/admin/register', formData, {
+        response = await axios.post('/admin/register', formData, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('adminToken')}`
           }

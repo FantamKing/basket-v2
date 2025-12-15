@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
+import axios from '../../utils/axios';
 import Swal from 'sweetalert2';
 
 const AddProductContainer = styled.div``;
@@ -186,7 +186,7 @@ const AddProduct = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get('/api/categories');
+      const response = await axios.get('/categories');
       setCategories(response.data);
     } catch (error) {
       console.error('Error fetching categories:', error);
@@ -213,11 +213,11 @@ const AddProduct = () => {
     e.preventDefault();
     
     // Validation
-    if (!formData.name || !formData.price || !formData.category || !formData.stock) {
+    if (!formData.name || !formData.price || !formData.category || !formData.stock || !formData.unit || !formData.description) {
       Swal.fire({
         icon: 'error',
         title: 'Validation Error',
-        text: 'Please fill in all required fields'
+        text: 'Please fill in all required fields (name, description, price, category, stock, unit)'
       });
       return;
     }
@@ -252,7 +252,7 @@ const AddProduct = () => {
         }
       };
 
-      await axios.post('/api/admin/products', formDataToSend, config);
+      await axios.post('/admin/products', formDataToSend, config);
 
       Swal.fire({
         icon: 'success',

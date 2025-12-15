@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import axios from 'axios';
+import axios from '../../utils/axios';
 import Swal from 'sweetalert2';
 
 // Reuse styled components from AddProduct.jsx
@@ -215,7 +215,7 @@ const EditProduct = () => {
 
   const fetchProductDetails = async () => {
     try {
-      const response = await axios.get(`/api/products/${id}`);
+      const response = await axios.get(`/products/${id}`);
       const product = response.data;
       
       setFormData({
@@ -245,7 +245,7 @@ const EditProduct = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get('/api/categories');
+      const response = await axios.get('/categories');
       setCategories(response.data);
     } catch (error) {
       console.error('Error fetching categories:', error);
@@ -304,7 +304,7 @@ const EditProduct = () => {
         }
       };
 
-      await axios.put(`/api/admin/products/${id}`, formDataToSend, config);
+      await axios.put(`/admin/products/${id}`, formDataToSend, config);
 
       Swal.fire({
         icon: 'success',

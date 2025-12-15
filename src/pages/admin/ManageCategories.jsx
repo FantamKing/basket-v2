@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
+import axios from '../../utils/axios';
 import Swal from 'sweetalert2';
 
 const ManageCategoriesContainer = styled.div``;
@@ -217,7 +217,7 @@ const ManageCategories = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get('/api/categories');
+      const response = await axios.get('/categories');
       setCategories(response.data);
     } catch (error) {
       console.error('Error fetching categories:', error);
@@ -275,7 +275,7 @@ const ManageCategories = () => {
 
       if (editingId) {
         // Update existing category
-        await axios.put(`/api/admin/categories/${editingId}`, formDataToSend, config);
+        await axios.put(`/admin/categories/${editingId}`, formDataToSend, config);
         Swal.fire({
           icon: 'success',
           title: 'Success!',
@@ -286,7 +286,7 @@ const ManageCategories = () => {
         setEditingId(null);
       } else {
         // Create new category
-        await axios.post('/api/admin/categories', formDataToSend, config);
+        await axios.post('/admin/categories', formDataToSend, config);
         Swal.fire({
           icon: 'success',
           title: 'Success!',
@@ -346,7 +346,7 @@ const ManageCategories = () => {
           }
         };
 
-        await axios.delete(`/api/admin/categories/${categoryId}`, config);
+        await axios.delete(`/admin/categories/${categoryId}`, config);
 
         Swal.fire({
           icon: 'success',
@@ -376,7 +376,7 @@ const ManageCategories = () => {
         }
       };
 
-      await axios.put(`/api/admin/categories/${categoryId}`, 
+      await axios.put(`/admin/categories/${categoryId}`, 
         { isActive: !currentStatus },
         config
       );

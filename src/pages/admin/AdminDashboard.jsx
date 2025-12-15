@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../../utils/axios';
 import './AdminDashboard.css';
 
 const AdminDashboard = () => {
@@ -42,7 +42,7 @@ const AdminDashboard = () => {
   const fetchStats = async () => {
     try {
       const token = localStorage.getItem('adminToken');
-      const response = await axios.get('/api/admin/stats', {
+      const response = await axios.get('/admin/stats', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setStats(response.data);
@@ -54,7 +54,7 @@ const AdminDashboard = () => {
   const fetchRecentOrders = async () => {
     try {
       const token = localStorage.getItem('adminToken');
-      const response = await axios.get('/api/admin/orders', {
+      const response = await axios.get('/admin/orders', {
         headers: { Authorization: `Bearer ${token}` }
       });
       // Get only the first 5 recent orders

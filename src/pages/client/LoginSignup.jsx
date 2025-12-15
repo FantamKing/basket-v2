@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import axios from 'axios';
+import axios from '../../utils/axios';
 import Swal from 'sweetalert2';
 
 const AuthContainer = styled.div`
@@ -172,7 +172,7 @@ const LoginSignup = () => {
     try {
       if (isLogin) {
         // Login
-        const response = await axios.post('/api/login', {
+        const response = await axios.post('/login', {
           email: formData.email,
           password: formData.password
         });
@@ -191,7 +191,7 @@ const LoginSignup = () => {
         navigate('/');
       } else {
         // Signup
-        await axios.post('/api/signup', {
+        await axios.post('/signup', {
           name: formData.name,
           email: formData.email,
           password: formData.password,
