@@ -298,7 +298,7 @@ const ManageCategories = () => {
         setEditingId(null);
       } else {
         // Create new category
-        await axios.post('/admin/categories', formDataToSend, config);
+        await axios.post('/admin/categories', payload, config);
         Swal.fire({
           icon: 'success',
           title: 'Success!',
