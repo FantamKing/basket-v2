@@ -218,7 +218,6 @@ const ManageAdmins = () => {
                     placeholder="e.g., Tech Support, Vendor"
                   />
                 </div>
-                <div className="form-group">
               </>
             )}
             <button type="submit" className="submit-btn">{editingAdmin ? 'Update Admin' : 'Create Admin'}</button>
