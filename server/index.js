@@ -18,6 +18,9 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors());
+// HTTP request logging for easier debugging in Render logs
+const morgan = require('morgan');
+app.use(morgan('combined'));
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
 app.use('/uploads', express.static(path.resolve(__dirname, './uploads')));
@@ -55,6 +58,14 @@ app.get('/', (req, res) => {
 // Health check endpoint for Render
 app.get('/healthz', (req, res) => {
   res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+
+// Express error handler (returns JSON) to surface stack traces in logs
+app.use((err, req, res, next) => {
+  console.error('Express error handler:', err && err.stack ? err.stack : err);
+  const status = err && err.status ? err.status : 500;
+  // Return minimal message to client, full stack appears in server logs
+  res.status(status).json({ message: err && err.message ? err.message : 'Internal Server Error' });
 });
 
 const server = app.listen(PORT, () => {
