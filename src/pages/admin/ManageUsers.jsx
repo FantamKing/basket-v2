@@ -278,7 +278,7 @@ const ManageUsers = () => {
 
     try {
       const token = localStorage.getItem('adminToken');
-      const response = await axios.put(`/api/admin/users/${editingUser._id}`, formData, {
+      const response = await axios.put(`/admin/users/${editingUser._id}`, formData, {
         headers: { Authorization: `Bearer ${token}` }
       });
 
@@ -322,7 +322,7 @@ const ManageUsers = () => {
     if (result.isConfirmed) {
       try {
         const token = localStorage.getItem('adminToken');
-        await axios.delete(`/api/admin/users/${userId}`, {
+        await axios.delete(`/admin/users/${userId}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
 

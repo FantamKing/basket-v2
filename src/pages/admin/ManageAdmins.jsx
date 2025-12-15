@@ -73,7 +73,7 @@ const ManageAdmins = () => {
     if (!window.confirm('Are you sure you want to delete this admin?')) return;
 
     try {
-      await axios.delete(`/api/admin/admins/${adminId}`, {
+      await axios.delete(`/admin/admins/${adminId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('adminToken')}`
         }
@@ -90,7 +90,7 @@ const ManageAdmins = () => {
     if (!password) return;
 
     try {
-      await axios.put(`/api/admin/admins/${adminId}/password`, { newPassword: password }, {
+      await axios.put(`/admin/admins/${adminId}/password`, { newPassword: password }, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('adminToken')}`
         }
@@ -109,7 +109,7 @@ const ManageAdmins = () => {
     try {
       let response;
       if (editingAdmin) {
-        response = await axios.put(`/api/admin/admins/${editingAdmin._id}`, formData, {
+        response = await axios.put(`/admin/admins/${editingAdmin._id}`, formData, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('adminToken')}`
           }
