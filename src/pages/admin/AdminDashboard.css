@@ -11,7 +11,8 @@
   align-items: center;
   height: 60vh;
   font-size: 18px;
-  color: #666;
+  color: var(--text-color);
+  opacity: 0.7;
 }
 
 .dashboard-header {
@@ -20,11 +21,11 @@
   align-items: center;
   margin-bottom: 30px;
   padding-bottom: 20px;
-  border-bottom: 2px solid #e9ecef;
+  border-bottom: 2px solid var(--border-color);
 }
 
 .dashboard-header h1 {
-  color: #333;
+  color: var(--text-color);
   font-size: 28px;
   margin: 0;
 }
@@ -36,8 +37,9 @@
 }
 
 .admin-info span {
-  color: #666;
+  color: var(--text-color);
   font-size: 14px;
+  opacity: 0.7;
 }
 
 .logout-btn {

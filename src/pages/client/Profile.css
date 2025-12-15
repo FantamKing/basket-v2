@@ -1,11 +1,12 @@
 .profile-container {
   min-height: 100vh;
-  background-color: #f8f9fa;
+  background-color: var(--bg-color);
   padding: 30px 0;
+  transition: background-color 0.3s ease;
 }
 
 .profile-title {
-  color: #333;
+  color: var(--text-color);
   margin-bottom: 30px;
   text-align: center;
 }
@@ -19,10 +20,12 @@
 }
 
 .profile-card {
-  background: white;
+  background: var(--card-bg);
   border-radius: 15px;
   padding: 30px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 15px var(--shadow);
+  border: 1px solid var(--border-color);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .profile-header {
@@ -47,18 +50,20 @@
 
 .profile-info h2 {
   margin: 0 0 5px 0;
-  color: #333;
+  color: var(--text-color);
 }
 
 .profile-email {
-  color: #666;
+  color: var(--text-color);
   margin: 0 0 5px 0;
+  opacity: 0.8;
 }
 
 .profile-meta {
-  color: #888;
+  color: var(--text-color);
   font-size: 14px;
   margin: 0;
+  opacity: 0.6;
 }
 
 .edit-btn {
@@ -87,7 +92,7 @@
 .form-group label {
   display: block;
   margin-bottom: 8px;
-  color: #333;
+  color: var(--text-color);
   font-weight: 500;
 }
 
@@ -95,9 +100,18 @@
 .form-group textarea {
   width: 100%;
   padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  border: 1px solid var(--input-border);
+  border-radius: 8px;
   font-size: 16px;
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--input-focus-border);
 }
 
 .form-group input:focus,

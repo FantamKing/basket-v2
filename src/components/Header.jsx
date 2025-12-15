@@ -50,7 +50,7 @@ const Header = () => {
             onClick={toggleTheme}
             title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
           >
-            {theme === 'light' ? '🌙' : '☀️'}
+            <div className={`theme-icon ${theme === 'light' ? 'moon' : 'sun'}`}></div>
           </button>
 
           {/* Mobile Menu Button */}
