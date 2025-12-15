@@ -249,12 +249,14 @@ router.post('/login', async (req, res) => {
 router.get('/sign', verifyAdmin, (req, res) => {
     try {
         const timestamp = Math.floor(Date.now() / 1000);
-        const signature = cloudinary.utils.api_sign_request({ timestamp }, process.env.CLOUDINARY_API_SECRET);
+        const folder = req.query.folder || 'basket-products'; // default folder
+        const signature = cloudinary.utils.api_sign_request({ timestamp, folder }, process.env.CLOUDINARY_API_SECRET);
         res.json({
             signature,
             timestamp,
             api_key: process.env.CLOUDINARY_API_KEY,
-            cloud_name: process.env.CLOUDINARY_CLOUD_NAME
+            cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+            folder
         });
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -265,10 +267,24 @@ router.get('/sign', verifyAdmin, (req, res) => {
 router.post('/products', verifyAdmin, async (req, res) => {
     try {
         console.log('Product creation request received');
-        console.log('Body:', req.body);
+        console.log('Body:', JSON.stringify(req.body));
         console.log('File (if any):', req.file);
 
-        const { name, description, price, originalPrice, category, stock, unit, discount, isFeatured, image } = req.body;
+        const { name, description, price, originalPrice, category, stock, unit, discount, isFeatured, image } = req.body || {};
+
+        // Basic validation with clear messages for the client
+        const missing = [];
+        if (!name) missing.push('name');
+        if (!description) missing.push('description');
+        if (price === undefined || price === null || price === '') missing.push('price');
+        if (!category) missing.push('category');
+        if (stock === undefined || stock === null || stock === '') missing.push('stock');
+        if (!unit) missing.push('unit');
+        if (!image && !req.file) missing.push('image');
+
+        if (missing.length > 0) {
+            return res.status(400).json({ message: `Missing required fields: ${missing.join(', ')}` });
+        }
 
         // Accept either an image URL provided by the client (direct Cloudinary upload)
         // or a server-side uploaded file (req.file.path)
@@ -277,14 +293,14 @@ router.post('/products', verifyAdmin, async (req, res) => {
         const product = new Product({
             name,
             description,
-            price: parseFloat(price),
-            originalPrice: parseFloat(originalPrice),
+            price: isNaN(parseFloat(price)) ? null : parseFloat(price),
+            originalPrice: isNaN(parseFloat(originalPrice)) ? 0 : parseFloat(originalPrice),
             category,
             image: imageUrl,
-            stock: parseInt(stock),
+            stock: isNaN(parseInt(stock)) ? 0 : parseInt(stock),
             unit,
-            discount: parseFloat(discount) || 0,
-            isFeatured: isFeatured === 'true'
+            discount: isNaN(parseFloat(discount)) ? 0 : parseFloat(discount),
+            isFeatured: (isFeatured === true || isFeatured === 'true')
         });
 
         console.log('Product object before save:', product);
