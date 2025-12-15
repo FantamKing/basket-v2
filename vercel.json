@@ -1,6 +1,14 @@
 {
+<<<<<<< HEAD
   "rewrites": [
     { "source": "/api/(.*)", "destination": "https://expressbasket.onrender.com/api/$1" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
+=======
+"rewrites": [
+{ "source": "/api/(.)", "destination": "https://expressbasket.onrender.com/api/$1" },
+{ "source": "/(.)", "destination": "/index.html" }
+]
+}
+>>>>>>> dfde581070d10f56318e88fc62b2ab7cefb16f45
