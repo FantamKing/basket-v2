@@ -1,9 +1,10 @@
 /* Footer Styles */
 .footer {
-  background: #333;
-  color: white;
+  background: var(--sidebar-bg);
+  color: var(--text-color);
   padding: 40px 0 20px;
   margin-top: auto;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .container {
@@ -27,9 +28,10 @@
 }
 
 .footer-section p {
-  color: #ccc;
+  color: var(--text-color);
   line-height: 1.6;
   margin-bottom: 15px;
+  opacity: 0.8;
 }
 
 .footer-section ul {
@@ -43,9 +45,10 @@
 }
 
 .footer-section ul li a {
-  color: #ccc;
+  color: var(--text-color);
   text-decoration: none;
   transition: color 0.3s ease;
+  opacity: 0.8;
 }
 
 .footer-section ul li a:hover {
@@ -53,15 +56,17 @@
 }
 
 .footer-bottom {
-  border-top: 1px solid #444;
+  border-top: 1px solid var(--border-color);
   padding-top: 20px;
   text-align: center;
+  transition: border-color 0.3s ease;
 }
 
 .footer-bottom p {
   margin: 5px 0;
-  color: #aaa;
+  color: var(--text-color);
   font-size: 14px;
+  opacity: 0.7;
 }
 
 /* Responsive Design */

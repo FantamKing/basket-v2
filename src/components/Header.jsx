@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useCart } from '../context/CartContext.jsx';
+import { useTheme } from '../context/ThemeContext.jsx';
 import './Header.css';
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { getCartCount } = useCart();
+  const { theme, toggleTheme } = useTheme();
   const cartCount = getCartCount();
 
   return (
@@ -42,6 +44,14 @@ const Header = () => {
               <i className="expDel_sign_in"></i> Login
             </NavLink>
           </nav>
+
+          <button 
+            className="theme-toggle-btn"
+            onClick={toggleTheme}
+            title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+          >
+            {theme === 'light' ? '🌙' : '☀️'}
+          </button>
 
           {/* Mobile Menu Button */}
           <button 

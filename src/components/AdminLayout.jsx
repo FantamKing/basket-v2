@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useTheme } from '../context/ThemeContext.jsx';
 import './AdminLayout.css';
 
 const AdminLayout = ({ children }) => {
   const navigate = useNavigate();
+  const { theme, toggleTheme } = useTheme();
 
   const handleLogout = () => {
     localStorage.removeItem('admin');
@@ -54,6 +56,13 @@ const AdminLayout = ({ children }) => {
       <main className="admin-main">
         <header className="admin-header">
           <h1>Basket Admin Dashboard</h1>
+          <button 
+            className="theme-toggle-btn"
+            onClick={toggleTheme}
+            title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+          >
+            {theme === 'light' ? '🌙' : '☀️'}
+          </button>
         </header>
         <div className="admin-content">
           {children}
