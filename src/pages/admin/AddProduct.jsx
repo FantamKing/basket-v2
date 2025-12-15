@@ -240,8 +240,7 @@ const AddProduct = () => {
       const uploadImageToCloudinary = async (file) => {
         const cloudForm = new FormData();
         cloudForm.append('file', file);
-        cloudForm.append('upload_preset', 'basket_unsigned');
-        cloudForm.append('folder', 'basket-products');
+        cloudForm.append('upload_preset', 'basket_products');
 
         const res = await fetch(`https://api.cloudinary.com/v1_1/dk57ostu8/upload`, {
           method: 'POST',

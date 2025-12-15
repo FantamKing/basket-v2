@@ -262,8 +262,7 @@ const ManageCategories = () => {
       if (image) {
         const cloudForm = new FormData();
         cloudForm.append('file', image);
-        cloudForm.append('upload_preset', 'basket_unsigned');
-        cloudForm.append('folder', 'basket-categories');
+        cloudForm.append('upload_preset', 'basket_categories');
 
         const res = await fetch(`https://api.cloudinary.com/v1_1/dk57ostu8/upload`, {
           method: 'POST',
