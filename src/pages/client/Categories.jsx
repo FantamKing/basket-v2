@@ -19,32 +19,32 @@ const CategoryHeader = styled.div`
   align-items: center;
   margin-bottom: 30px;
   padding-bottom: 15px;
-  border-bottom: 2px solid #28a745;
+  border-bottom: 2px solid var(--border-light);
 `;
 
 const CategoryTitle = styled.h2`
   font-size: 28px;
-  color: #333;
+  color: var(--text-color);
   display: flex;
   align-items: center;
   gap: 10px;
   
   i {
-    color: #28a745;
+    color: var(--btn-primary);
   }
 `;
 
 const ViewAll = styled.button`
   background: none;
-  border: 2px solid #28a745;
-  color: #28a745;
+  border: 2px solid var(--btn-primary);
+  color: var(--btn-primary);
   padding: 8px 20px;
   border-radius: 5px;
   font-weight: 500;
   transition: all 0.3s;
   
   &:hover {
-    background-color: #28a745;
+    background-color: var(--btn-primary);
     color: white;
   }
 `;
@@ -58,7 +58,7 @@ const ProductGrid = styled.div`
 const NoProducts = styled.div`
   text-align: center;
   padding: 40px;
-  color: #666;
+  color: var(--text-secondary);
   font-size: 18px;
 `;
 
@@ -111,7 +111,7 @@ const Categories = () => {
 
   return (
     <CategoriesContainer>
-      <h1 style={{ fontSize: '36px', marginBottom: '30px', color: '#333' }}>All Categories</h1>
+      <h1 style={{ fontSize: '36px', marginBottom: '30px', color: 'var(--text-color)' }}>All Categories</h1>
       
       {categories.map(category => (
         <CategorySection key={category._id}>

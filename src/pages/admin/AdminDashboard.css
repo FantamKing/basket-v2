@@ -231,7 +231,7 @@
 }
 
 .view-all-btn {
-  background: #28a745;
+  background: var(--btn-primary);
   color: white;
   border: none;
   padding: 8px 16px;
@@ -240,19 +240,9 @@
   font-size: 14px;
   transition: background-color 0.3s;
 }
-  .view-all-btn {
-    background: var(--btn-primary);
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s;
-  }
-  .view-all-btn:hover {
-    background: var(--btn-primary-hover);
-  }
+.view-all-btn:hover {
+  background: var(--btn-primary-hover);
+}
 
 .orders-list {
   display: flex;
@@ -332,19 +322,6 @@
 .order-status.cancelled {
   background-color: var(--error-bg);
   color: var(--error-text);
-}
-  background-color: #cce5ff;
-  color: #004085;
-}
-
-.order-status.delivered {
-  background-color: #d4edda;
-  color: #155724;
-}
-
-.order-status.cancelled {
-  background-color: #f8d7da;
-  color: #721c24;
 }
 
 .no-orders {

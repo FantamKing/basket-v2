@@ -9,14 +9,14 @@ const AuthContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--gradient-primary);
   padding: 20px;
 `;
 
 const AuthBox = styled.div`
-  background: white;
+  background: var(--card-bg);
   border-radius: 20px;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+  box-shadow: 0 15px 35px var(--shadow-dark);
   width: 100%;
   max-width: 400px;
   padding: 40px;
@@ -25,7 +25,7 @@ const AuthBox = styled.div`
 const AuthTabs = styled.div`
   display: flex;
   margin-bottom: 30px;
-  border-bottom: 2px solid #eee;
+  border-bottom: 2px solid var(--border-light);
 `;
 
 const AuthTab = styled.button`
@@ -35,20 +35,20 @@ const AuthTab = styled.button`
   border: none;
   font-size: 18px;
   font-weight: 500;
-  color: ${props => props.active ? '#28a745' : '#666'};
-  border-bottom: 2px solid ${props => props.active ? '#28a745' : 'transparent'};
+  color: ${props => props.active ? 'var(--btn-primary)' : 'var(--text-secondary)'};
+  border-bottom: 2px solid ${props => props.active ? 'var(--btn-primary)' : 'transparent'};
   cursor: pointer;
   transition: all 0.3s;
   
   &:hover {
-    color: #28a745;
+    color: var(--btn-primary);
   }
 `;
 
 const AuthTitle = styled.h2`
   text-align: center;
   margin-bottom: 30px;
-  color: #333;
+  color: var(--text-color);
 `;
 
 const AuthForm = styled.form`
@@ -64,29 +64,29 @@ const FormGroup = styled.div`
 const FormLabel = styled.label`
   display: block;
   margin-bottom: 8px;
-  color: #555;
+  color: var(--text-secondary);
   font-weight: 500;
 `;
 
 const FormInput = styled.input`
   width: 100%;
   padding: 12px 15px;
-  border: 2px solid #ddd;
+  border: 2px solid var(--border-color);
   border-radius: 8px;
   font-size: 16px;
   transition: all 0.3s;
   
   &:focus {
     outline: none;
-    border-color: #28a745;
-    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+    border-color: var(--input-focus-border);
+    box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.08);
   }
 `;
 
 const SubmitButton = styled.button`
   width: 100%;
   padding: 15px;
-  background-color: #28a745;
+  background-color: var(--btn-primary);
   color: white;
   border: none;
   border-radius: 8px;
@@ -97,17 +97,17 @@ const SubmitButton = styled.button`
   margin-top: 10px;
   
   &:hover {
-    background-color: #218838;
+    background-color: var(--btn-primary-hover);
   }
   
   &:disabled {
-    background-color: #6c757d;
+    background-color: var(--btn-secondary);
     cursor: not-allowed;
   }
 `;
 
 const ErrorMessage = styled.div`
-  color: #dc3545;
+  color: var(--btn-danger);
   font-size: 14px;
   margin-top: 5px;
 `;

@@ -367,7 +367,7 @@ const ManageUsers = () => {
           )}
         </SearchContainer>
         
-        <div style={{ marginBottom: '10px', color: '#666', fontSize: '14px' }}>
+        <div style={{ marginBottom: '10px', color: 'var(--text-secondary)', fontSize: '14px' }}>
           Showing {filteredUsers.length} of {users.length} users
           {searchTerm && ` (filtered by "${searchTerm}")`}
         </div>
@@ -419,7 +419,7 @@ const ManageUsers = () => {
               })
             ) : (
               <tr>
-                <td colSpan="5" style={{ textAlign: 'center', padding: '40px', color: '#666' }}>
+                <td colSpan="5" style={{ textAlign: 'center', padding: '40px', color: 'var(--text-secondary)' }}>
                   {searchTerm ? `No users found matching "${searchTerm}"` : 'No users found'}
                 </td>
               </tr>

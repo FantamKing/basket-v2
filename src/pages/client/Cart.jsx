@@ -366,7 +366,7 @@ const Cart = () => {
           </SummaryRow>
           
           {deliveryCharge > 0 && (
-            <p style={{ fontSize: '12px', color: '#666', marginBottom: '15px' }}>
+            <p style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '15px' }}>
               Add ₹{(500 - total).toFixed(2)} more for FREE delivery
             </p>
           )}

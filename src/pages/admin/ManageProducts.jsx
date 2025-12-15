@@ -15,11 +15,11 @@ const Header = styled.div`
 
 const Title = styled.h2`
   font-size: 28px;
-  color: #333;
+  color: var(--text-color);
 `;
 
 const AddButton = styled.button`
-  background: #28a745;
+  background: var(--btn-primary);
   color: white;
   border: none;
   padding: 12px 24px;
@@ -29,7 +29,7 @@ const AddButton = styled.button`
   transition: background-color 0.3s;
 
   &:hover {
-    background: #218838;
+    background: var(--btn-primary-hover);
   }
 
   i {
@@ -39,28 +39,28 @@ const AddButton = styled.button`
 
 const ProductsTable = styled.table`
   width: 100%;
-  background: white;
+  background: var(--card-bg);
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 6px var(--shadow);
   border-collapse: collapse;
 
   th {
-    background: #f8f9fa;
+    background: var(--nav-link-hover);
     padding: 15px;
     text-align: left;
     font-weight: 600;
-    color: #333;
-    border-bottom: 2px solid #dee2e6;
+    color: var(--text-color);
+    border-bottom: 2px solid var(--border-color);
   }
 
   td {
     padding: 15px;
-    border-bottom: 1px solid #dee2e6;
+    border-bottom: 1px solid var(--border-color);
   }
 
   tr:hover {
-    background: #f8f9fa;
+    background: var(--nav-link-hover);
   }
 `;
 
@@ -81,20 +81,20 @@ const ActionButton = styled.button`
   transition: background-color 0.3s;
 
   &.edit {
-    background: #007bff;
+    background: var(--btn-secondary);
     color: white;
 
     &:hover {
-      background: #0056b3;
+      background: var(--btn-secondary-hover);
     }
   }
 
   &.delete {
-    background: #dc3545;
+    background: var(--btn-danger);
     color: white;
 
     &:hover {
-      background: #c82333;
+      background: var(--btn-danger-hover);
     }
   }
 `;
@@ -103,17 +103,17 @@ const Loading = styled.div`
   text-align: center;
   padding: 50px;
   font-size: 18px;
-  color: #666;
+  color: var(--text-secondary);
 `;
 
 const NoProducts = styled.div`
   text-align: center;
   padding: 50px;
   font-size: 18px;
-  color: #666;
-  background: white;
+  color: var(--text-secondary);
+  background: var(--card-bg);
   border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 6px var(--shadow);
 `;
 
 const ManageProducts = () => {
@@ -200,7 +200,7 @@ const ManageProducts = () => {
 
       {products.length === 0 ? (
         <NoProducts>
-          <i className="expDel_box_open" style={{ fontSize: '48px', color: '#ccc', marginBottom: '20px' }}></i>
+          <i className="expDel_box_open" style={{ fontSize: '48px', color: 'var(--border-color)', marginBottom: '20px' }}></i>
           <p>No products found. Add the first product.</p>
         </NoProducts>
       ) : (

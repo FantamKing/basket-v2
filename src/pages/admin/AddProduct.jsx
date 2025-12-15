@@ -435,7 +435,7 @@ const AddProduct = () => {
                   <i className="expDel_cloud_upload_alt"></i>
                 </UploadIcon>
                 <p>Click to upload product image</p>
-                <p style={{ fontSize: '12px', color: '#666', marginTop: '5px' }}>
+                <p style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: '5px' }}>
                   Recommended size: 500x500px
                 </p>
                 <input

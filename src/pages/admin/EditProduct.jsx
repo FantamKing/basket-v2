@@ -465,7 +465,7 @@ const EditProduct = () => {
 
           <FormGroup className="full-width">
             <Label>Product Image</Label>
-            <p style={{ fontSize: '14px', color: '#666', marginBottom: '10px' }}>
+            <p style={{ fontSize: '14px', color: 'var(--text-secondary)', marginBottom: '10px' }}>
               Current Image:
             </p>
             {currentImage && (
@@ -487,7 +487,7 @@ const EditProduct = () => {
                   <i className="expDel_cloud_upload_alt"></i>
                 </UploadIcon>
                 <p>Click to upload new product image</p>
-                <p style={{ fontSize: '12px', color: '#666', marginTop: '5px' }}>
+                <p style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: '5px' }}>
                   Leave empty to keep current image
                 </p>
                 <input
@@ -501,7 +501,7 @@ const EditProduct = () => {
             
             {imagePreview && (
               <ImagePreview>
-                <p style={{ fontSize: '14px', color: '#666', marginBottom: '10px' }}>
+                <p style={{ fontSize: '14px', color: 'var(--text-secondary)', marginBottom: '10px' }}>
                   New Image Preview:
                 </p>
                 <img src={imagePreview} alt="Preview" />
