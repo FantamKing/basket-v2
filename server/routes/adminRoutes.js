@@ -35,8 +35,9 @@ const storage = new CloudinaryStorage({
 
 const upload = multer({
     storage,
-    // Increase file size limit to 50MB to accommodate larger images uploaded by users
-    limits: { fileSize: 50 * 1024 * 1024 }, // 50MB limit
+    // Raise multer limit to a large value; Render may still enforce request limits.
+    // Set to 200MB here to allow big uploads if they go through server-side.
+    limits: { fileSize: 200 * 1024 * 1024 }, // 200MB limit
     fileFilter: (req, file, cb) => {
         if (file.mimetype.startsWith('image/')) {
             cb(null, true);
@@ -244,16 +245,34 @@ router.post('/login', async (req, res) => {
     }
 });
 
+// Provide Cloudinary signature for client-side direct uploads
+router.get('/sign', verifyAdmin, (req, res) => {
+    try {
+        const timestamp = Math.floor(Date.now() / 1000);
+        const signature = cloudinary.utils.api_sign_request({ timestamp }, process.env.CLOUDINARY_API_SECRET);
+        res.json({
+            signature,
+            timestamp,
+            api_key: process.env.CLOUDINARY_API_KEY,
+            cloud_name: process.env.CLOUDINARY_CLOUD_NAME
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
 // Add product
-router.post('/products', verifyAdmin, upload.single('image'), async (req, res) => {
+router.post('/products', verifyAdmin, async (req, res) => {
     try {
         console.log('Product creation request received');
         console.log('Body:', req.body);
-        console.log('File:', req.file);
+        console.log('File (if any):', req.file);
 
-        const { name, description, price, originalPrice, category, stock, unit, discount, isFeatured } = req.body;
+        const { name, description, price, originalPrice, category, stock, unit, discount, isFeatured, image } = req.body;
 
-        console.log('Parsed data:', { name, description, price, category, stock, unit });
+        // Accept either an image URL provided by the client (direct Cloudinary upload)
+        // or a server-side uploaded file (req.file.path)
+        const imageUrl = req.file ? req.file.path : (image || '');
 
         const product = new Product({
             name,
@@ -261,7 +280,7 @@ router.post('/products', verifyAdmin, upload.single('image'), async (req, res) =
             price: parseFloat(price),
             originalPrice: parseFloat(originalPrice),
             category,
-            image: req.file ? req.file.path : '', // Cloudinary URL
+            image: imageUrl,
             stock: parseInt(stock),
             unit,
             discount: parseFloat(discount) || 0,
@@ -278,9 +297,8 @@ router.post('/products', verifyAdmin, upload.single('image'), async (req, res) =
     } catch (error) {
         console.error('Error saving product:', error);
 
-        // Handle multer errors specifically
         if (error.code === 'LIMIT_FILE_SIZE') {
-            return res.status(400).json({ message: 'File too large. Maximum size is 10MB.' });
+            return res.status(400).json({ message: 'File too large. Maximum size is 200MB.' });
         }
         if (error.name === 'MulterError') {
             return res.status(400).json({ message: error.message });
@@ -349,17 +367,19 @@ router.get('/products', verifyAdmin, async (req, res) => {
 });
 
 // Add category
-router.post('/categories', verifyAdmin, upload.single('image'), async (req, res) => {
+router.post('/categories', verifyAdmin, async (req, res) => {
     try {
-        const { name, description } = req.body;
+        const { name, description, image } = req.body;
 
         console.log('Creating category:', name);
-        console.log('File uploaded:', req.file);
+        console.log('File uploaded (if any):', req.file);
+
+        const imageUrl = req.file ? req.file.path : (image || '');
 
         const category = new Category({
             name,
             description,
-            image: req.file ? req.file.path : '' // Cloudinary returns the URL in req.file.path
+            image: imageUrl // Cloudinary URL expected
         });
 
         await category.save();
@@ -369,9 +389,8 @@ router.post('/categories', verifyAdmin, upload.single('image'), async (req, res)
     } catch (error) {
         console.error('Error saving category:', error);
 
-        // Handle multer errors specifically
         if (error.code === 'LIMIT_FILE_SIZE') {
-            return res.status(400).json({ message: 'File too large. Maximum size is 10MB.' });
+            return res.status(400).json({ message: 'File too large. Maximum size is 200MB.' });
         }
         if (error.name === 'MulterError') {
             return res.status(400).json({ message: error.message });
