@@ -80,8 +80,8 @@
 }
 
 .logout-btn:hover {
-  background-color: rgba(220, 53, 69, 0.2);
-  color: #dc3545;
+  background-color: rgba(220, 53, 69, 0.12);
+  color: var(--btn-danger);
 }
 
 .admin-main {
@@ -187,7 +187,7 @@
 
 .theme-toggle-btn:hover {
   background-color: var(--nav-link-hover);
-  color: #28a745;
+  color: var(--btn-primary);
 }
 
 .theme-toggle-btn i {
@@ -203,7 +203,7 @@
 }
 
 .theme-icon.sun {
-  background: radial-gradient(circle at 30% 30%, #ffd700, #ffed4e, #ffa500);
+  background: radial-gradient(circle at 30% 30%, var(--sun-1, #ffd700), var(--sun-2, #ffed4e), var(--sun-3, #ffa500));
   border-radius: 50%;
   box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
   animation: sunGlow 2s ease-in-out infinite alternate;
@@ -222,7 +222,7 @@
 }
 
 .theme-icon.moon {
-  background: radial-gradient(circle at 25% 25%, #ffffff, #e0e0e0, #c0c0c0);
+  background: radial-gradient(circle at 25% 25%, var(--moon-1, #ffffff), var(--moon-2, #e0e0e0), var(--moon-3, #c0c0c0));
   border-radius: 50%;
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
   animation: moonGlow 2s ease-in-out infinite alternate;
@@ -235,9 +235,9 @@
   left: 3px;
   width: 6px;
   height: 6px;
-  background: #c0c0c0;
+  background: var(--moon-crater, #c0c0c0);
   border-radius: 50%;
-  box-shadow: 8px 0 0 #c0c0c0, 4px 6px 0 #c0c0c0, 12px 4px 0 #c0c0c0;
+  box-shadow: 8px 0 0 var(--moon-crater, #c0c0c0), 4px 6px 0 var(--moon-crater, #c0c0c0), 12px 4px 0 var(--moon-crater, #c0c0c0);
 }
 
 @keyframes sunGlow {

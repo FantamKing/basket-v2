@@ -60,7 +60,7 @@ const Home = () => {
       </section>
 
       {error && (
-        <div style={{ backgroundColor: '#f8d7da', color: '#721c24', padding: '10px', margin: '20px 0', borderRadius: '5px' }}>
+        <div style={{ backgroundColor: 'var(--error-bg)', color: 'var(--error-text)', padding: '10px', margin: '20px 0', borderRadius: '5px' }}>
           {error}
         </div>
       )}
@@ -103,8 +103,8 @@ const Home = () => {
           )) : (
             <div className="product-card">
               <div className="product-image">
-                <div style={{ width: '100%', height: '200px', background: '#f0f0f0', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '8px' }}>
-                  <span style={{ color: '#666' }}>No Featured Products</span>
+                <div style={{ width: '100%', height: '200px', background: 'var(--nav-link-hover)', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '8px' }}>
+                  <span style={{ color: 'var(--text-secondary)' }}>No Featured Products</span>
                 </div>
               </div>
               <div className="product-info">

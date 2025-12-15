@@ -47,7 +47,7 @@
   opacity: 0;
   transform: translateY(10px);
   transition: all 0.3s ease;
-  color: #333;
+  color: var(--text-color);
 }
 
 .product-card:hover .quick-view {
@@ -56,8 +56,8 @@
 }
 
 .quick-view:hover {
-  background: white;
-  color: #28a745;
+  background: var(--card-bg);
+  color: var(--btn-primary);
 }
 
 .product-info {
@@ -86,7 +86,7 @@
 .current-price {
   font-size: 20px;
   font-weight: 700;
-  color: #28a745;
+  color: var(--btn-primary);
 }
 
 .unit {
@@ -97,7 +97,7 @@
 
 .add-to-cart-btn {
   width: 100%;
-  background: #28a745;
+  background: var(--btn-primary);
   color: white;
   border: none;
   border-radius: 8px;
@@ -113,7 +113,7 @@
 }
 
 .add-to-cart-btn:hover {
-  background: #218838;
+  background: var(--btn-primary-hover);
   transform: translateY(-2px);
 }
 

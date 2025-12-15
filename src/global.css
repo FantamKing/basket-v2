@@ -8,19 +8,40 @@
   /* Light theme variables */
   --bg-color: #f8f9fa;
   --text-color: #333;
+  --text-secondary: #666;
+  --text-muted: #999;
+  --text-light: #ccc;
   --header-bg: #fff;
   --sidebar-bg: #f8f9fa;
   --card-bg: #fff;
   --border-color: #ddd;
+  --border-light: #e9ecef;
   --btn-primary: #28a745;
   --btn-primary-hover: #218838;
   --btn-secondary: #6c757d;
   --btn-secondary-hover: #5a6268;
+  --btn-danger: #dc3545;
+  --btn-danger-hover: #c82333;
   --input-bg: #fff;
   --input-border: #ddd;
   --input-focus-border: #28a745;
   --nav-link-hover: #f0f0f0;
   --shadow: rgba(0, 0, 0, 0.1);
+  --shadow-dark: rgba(0, 0, 0, 0.15);
+  --success-bg: #d4edda;
+  --success-text: #155724;
+  --error-bg: #f8d7da;
+  --error-text: #721c24;
+  --warning-bg: #fff3cd;
+  --warning-text: #856404;
+  --info-bg: #d1ecf1;
+  --info-text: #0c5460;
+  --primary-light-bg: #cce5ff;
+  --primary-light-text: #004085;
+  --avatar-bg: #e9ecef;
+  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --hero-overlay: rgba(0,0,0,0.7);
+  --moon-crater: #c0c0c0;
 }
 
 [data-theme="dark"] {
@@ -40,6 +61,7 @@
   --input-focus-border: #28a745;
   --nav-link-hover: #444;
   --shadow: rgba(0, 0, 0, 0.3);
+  --moon-crater: #888;
 }
 
 body {

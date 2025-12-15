@@ -43,7 +43,7 @@
 }
 
 .logout-btn {
-  background: #dc3545;
+  background: var(--btn-danger);
   color: white;
   border: none;
   padding: 8px 16px;
@@ -54,7 +54,7 @@
 }
 
 .logout-btn:hover {
-  background: #c82333;
+  background: var(--btn-danger-hover);
 }
 
 .dashboard-grid {
@@ -65,13 +65,13 @@
 }
 
 .dashboard-card {
-  background: white;
+  background: var(--card-bg);
   border-radius: 12px;
   padding: 25px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 6px var(--shadow);
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 1px solid #e9ecef;
+  border: 1px solid var(--border-light);
 }
 
 .dashboard-card:hover {
@@ -82,7 +82,7 @@
 .card-icon {
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--gradient-primary);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -93,21 +93,21 @@
 }
 
 .dashboard-card h3 {
-  color: #333;
+  color: var(--text-color);
   font-size: 20px;
   margin-bottom: 10px;
   font-weight: 600;
 }
 
 .dashboard-card p {
-  color: #666;
+  color: var(--text-secondary);
   margin-bottom: 20px;
   font-size: 14px;
   line-height: 1.5;
 }
 
 .card-btn {
-  background: #28a745;
+  background: var(--btn-primary);
   color: white;
   border: none;
   padding: 10px 20px;
@@ -120,19 +120,19 @@
 }
 
 .card-btn:hover {
-  background: #218838;
+  background: var(--btn-primary-hover);
 }
 
 .quick-stats {
-  background: white;
+  background: var(--card-bg);
   border-radius: 12px;
   padding: 25px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  border: 1px solid #e9ecef;
+  box-shadow: 0 4px 6px var(--shadow);
+  border: 1px solid var(--border-light);
 }
 
 .quick-stats h2 {
-  color: #333;
+  color: var(--text-color);
   font-size: 24px;
   margin-bottom: 20px;
   text-align: center;
@@ -147,21 +147,21 @@
 .stat-item {
   text-align: center;
   padding: 20px;
-  background: #f8f9fa;
+  background: var(--card-bg);
   border-radius: 8px;
-  border: 1px solid #e9ecef;
+  border: 1px solid var(--border-light);
 }
 
 .stat-number {
   display: block;
   font-size: 32px;
   font-weight: 700;
-  color: #28a745;
+  color: var(--btn-primary);
   margin-bottom: 5px;
 }
 
 .stat-label {
-  color: #666;
+  color: var(--text-secondary);
   font-size: 14px;
   font-weight: 500;
 }
@@ -208,10 +208,10 @@
 
 /* Recent Orders Section */
 .recent-orders {
-  background: white;
+  background: var(--card-bg);
   border-radius: 10px;
   padding: 30px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 6px var(--shadow);
   margin-top: 30px;
 }
 
@@ -221,11 +221,11 @@
   align-items: center;
   margin-bottom: 20px;
   padding-bottom: 10px;
-  border-bottom: 2px solid #f0f0f0;
+  border-bottom: 2px solid var(--border-light);
 }
 
 .orders-header h2 {
-  color: #333;
+  color: var(--text-color);
   font-size: 20px;
   margin: 0;
 }
@@ -240,10 +240,19 @@
   font-size: 14px;
   transition: background-color 0.3s;
 }
-
-.view-all-btn:hover {
-  background: #218838;
-}
+  .view-all-btn {
+    background: var(--btn-primary);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+  }
+  .view-all-btn:hover {
+    background: var(--btn-primary-hover);
+  }
 
 .orders-list {
   display: flex;
@@ -256,9 +265,9 @@
   justify-content: space-between;
   align-items: center;
   padding: 15px;
-  border: 1px solid #e9ecef;
+  border: 1px solid var(--border-light);
   border-radius: 8px;
-  background: #f8f9fa;
+  background: var(--card-bg);
   transition: box-shadow 0.3s;
 }
 
@@ -272,18 +281,18 @@
 
 .order-id {
   font-weight: 600;
-  color: #333;
+  color: var(--text-color);
   margin-bottom: 5px;
 }
 
 .order-customer {
-  color: #666;
+  color: var(--text-secondary);
   font-size: 14px;
   margin-bottom: 2px;
 }
 
 .order-date {
-  color: #999;
+  color: var(--text-muted);
   font-size: 12px;
 }
 
@@ -296,34 +305,34 @@
 
 .order-amount {
   font-weight: 600;
-  color: #28a745;
+  color: var(--btn-primary);
   font-size: 16px;
 }
 
-.order-status {
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: 500;
-  text-transform: capitalize;
-}
-
 .order-status.pending {
-  background-color: #fff3cd;
-  color: #856404;
+  background-color: var(--warning-bg);
+  color: var(--warning-text);
 }
-
 .order-status.confirmed {
-  background-color: #d1ecf1;
-  color: #0c5460;
+  background-color: var(--info-bg);
+  color: var(--info-text);
 }
-
 .order-status.processing {
-  background-color: #d4edda;
-  color: #155724;
+  background-color: var(--success-bg);
+  color: var(--success-text);
 }
-
 .order-status.shipped {
+  background-color: var(--primary-light-bg);
+  color: var(--primary-light-text);
+}
+.order-status.delivered {
+  background-color: var(--success-bg);
+  color: var(--success-text);
+}
+.order-status.cancelled {
+  background-color: var(--error-bg);
+  color: var(--error-text);
+}
   background-color: #cce5ff;
   color: #004085;
 }
@@ -340,7 +349,7 @@
 
 .no-orders {
   text-align: center;
-  color: #666;
+  color: var(--text-secondary);
   padding: 40px;
   font-style: italic;
 }

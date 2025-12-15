@@ -20,7 +20,7 @@ const StoreHeader = styled.div`
 
 const StoreTitle = styled.h1`
   font-size: 36px;
-  color: #333;
+  color: var(--text-color);
 `;
 
 const Filters = styled.div`
@@ -31,14 +31,14 @@ const Filters = styled.div`
 
 const FilterSelect = styled.select`
   padding: 10px 15px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   border-radius: 5px;
-  background: white;
+  background: var(--input-bg);
   font-size: 16px;
   
   &:focus {
     outline: none;
-    border-color: #28a745;
+    border-color: var(--input-focus-border);
   }
 `;
 
@@ -50,19 +50,19 @@ const SearchBox = styled.div`
   input {
     flex: 1;
     padding: 10px 15px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 5px 0 0 5px;
     font-size: 16px;
     
     &:focus {
       outline: none;
-      border-color: #28a745;
+      border-color: var(--input-focus-border);
     }
   }
   
   button {
     padding: 0 20px;
-    background-color: #28a745;
+    background-color: var(--btn-primary);
     color: white;
     border: none;
     border-radius: 0 5px 5px 0;
@@ -86,27 +86,27 @@ const Pagination = styled.div`
 
 const PageButton = styled.button`
   padding: 8px 15px;
-  border: 1px solid #ddd;
-  background: ${props => props.active ? '#28a745' : 'white'};
-  color: ${props => props.active ? 'white' : '#333'};
+  border: 1px solid var(--border-color);
+  background: ${props => props.active ? 'var(--btn-primary)' : 'var(--card-bg)'};
+  color: ${props => props.active ? 'white' : 'var(--text-color)'};
   border-radius: 5px;
   
   &:hover {
-    background-color: ${props => props.active ? '#218838' : '#f8f9fa'};
+    background-color: ${props => props.active ? 'var(--btn-primary-hover)' : 'var(--nav-link-hover)'};
   }
 `;
 
 const Loading = styled.div`
   text-align: center;
   padding: 50px;
-  color: #666;
+  color: var(--text-secondary);
   font-size: 18px;
 `;
 
 const NoProducts = styled.div`
   text-align: center;
   padding: 50px;
-  color: #666;
+  color: var(--text-secondary);
   font-size: 18px;
   grid-column: 1 / -1;
 `;
