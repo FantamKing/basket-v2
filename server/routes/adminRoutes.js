@@ -109,11 +109,32 @@ router.post('/setup', async (req, res) => {
 router.put('/admins/:id', verifySuperAdmin, async (req, res) => {
     try {
         const { username, email, role, permissions, isActive, tags } = req.body;
+        const currentAdminRole = req.admin.role;
         const updateData = {};
+
+        // Define role hierarchy levels
+        const roleLevels = {
+            'admin': 1,
+            'super_admin': 2,
+            'god': 3
+        };
 
         if (username) updateData.username = username;
         if (email) updateData.email = email;
-        if (role) updateData.role = role;
+
+        if (role) {
+            const currentLevel = roleLevels[currentAdminRole] || 0;
+            const requestedLevel = roleLevels[role] || 0;
+
+            // Check if current admin can assign the requested role
+            if (requestedLevel > currentLevel) {
+                return res.status(403).json({
+                    message: `You cannot assign role '${role}'. Your maximum allowed role is '${currentAdminRole}'.`
+                });
+            }
+            updateData.role = role;
+        }
+
         if (permissions) updateData.permissions = permissions;
         if (typeof isActive === 'boolean') updateData.isActive = isActive;
         if (tags) updateData.tags = tags;
@@ -185,9 +206,28 @@ router.get('/admins', verifyAdmin, async (req, res) => {
 router.post('/register', verifySuperAdmin, async (req, res) => {
     try {
         const { username, email, password, role, permissions, tags } = req.body;
+        const currentAdminRole = req.admin.role;
 
         if (!username || !email || !password) {
             return res.status(400).json({ message: 'Username, email, and password are required' });
+        }
+
+        // Define role hierarchy levels
+        const roleLevels = {
+            'admin': 1,
+            'super_admin': 2,
+            'god': 3
+        };
+
+        const requestedRole = role || 'admin';
+        const currentLevel = roleLevels[currentAdminRole] || 0;
+        const requestedLevel = roleLevels[requestedRole] || 0;
+
+        // Check if current admin can create the requested role
+        if (requestedLevel > currentLevel) {
+            return res.status(403).json({
+                message: `You cannot create an admin with role '${requestedRole}'. Your maximum allowed role is '${currentAdminRole}'.`
+            });
         }
 
         const existingAdmin = await Admin.findOne({ email });
@@ -199,7 +239,7 @@ router.post('/register', verifySuperAdmin, async (req, res) => {
             username,
             email,
             password,
-            role: role || 'admin',
+            role: requestedRole,
             permissions: permissions || ['manage_products', 'manage_categories'],
             tags: tags || []
         });

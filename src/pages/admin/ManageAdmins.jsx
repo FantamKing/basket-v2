@@ -184,8 +184,12 @@ const ManageAdmins = () => {
                     onChange={handleInputChange}
                   >
                     <option value="admin">Admin</option>
-                    <option value="super_admin">Super Admin</option>
-                    <option value="god">God</option>
+                    {currentAdmin?.role === 'super_admin' || currentAdmin?.role === 'god' ? (
+                      <option value="super_admin">Super Admin</option>
+                    ) : null}
+                    {currentAdmin?.role === 'god' && (
+                      <option value="god">God</option>
+                    )}
                   </select>
                 </div>
                 <div className="form-group">
