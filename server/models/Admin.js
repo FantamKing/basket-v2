@@ -18,12 +18,15 @@ const adminSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        enum: ['super_admin', 'admin'],
+        enum: ['god', 'super_admin', 'admin'],
         default: 'admin'
     },
     permissions: [{
         type: String,
-        enum: ['manage_products', 'manage_categories', 'manage_admins', 'view_reports']
+        enum: ['manage_products', 'manage_categories', 'manage_admins', 'manage_admins_passwords', 'manage_admins_roles', 'view_reports']
+    }],
+    tags: [{
+        type: String
     }],
     isActive: {
         type: Boolean,

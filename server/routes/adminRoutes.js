@@ -54,7 +54,7 @@ const verifySuperAdmin = (req, res, next) => {
 
     try {
         const verified = jwt.verify(token, process.env.JWT_SECRET);
-        if (verified.role !== 'super_admin') return res.status(403).json({ message: 'Super admin access required' });
+        if (verified.role !== 'super_admin' && verified.role !== 'god') return res.status(403).json({ message: 'Super admin or God access required' });
         req.admin = verified;
         next();
     } catch (error) {
@@ -94,7 +94,8 @@ router.post('/setup', async (req, res) => {
             email,
             password,
             role: 'super_admin',
-            permissions: ['manage_products', 'manage_categories', 'manage_admins', 'view_reports']
+            permissions: ['manage_products', 'manage_categories', 'manage_admins', 'view_reports', 'manage_admins_passwords', 'manage_admins_roles'],
+            tags: []
         });
 
         await admin.save();
@@ -107,7 +108,7 @@ router.post('/setup', async (req, res) => {
 // Update admin
 router.put('/admins/:id', verifySuperAdmin, async (req, res) => {
     try {
-        const { username, email, role, permissions, isActive } = req.body;
+        const { username, email, role, permissions, isActive, tags } = req.body;
         const updateData = {};
 
         if (username) updateData.username = username;
@@ -115,6 +116,7 @@ router.put('/admins/:id', verifySuperAdmin, async (req, res) => {
         if (role) updateData.role = role;
         if (permissions) updateData.permissions = permissions;
         if (typeof isActive === 'boolean') updateData.isActive = isActive;
+        if (tags) updateData.tags = tags;
 
         const admin = await Admin.findByIdAndUpdate(req.params.id, updateData, { new: true });
         if (!admin) return res.status(404).json({ message: 'Admin not found' });
@@ -127,9 +129,32 @@ router.put('/admins/:id', verifySuperAdmin, async (req, res) => {
                 email: admin.email,
                 role: admin.role,
                 permissions: admin.permissions,
-                isActive: admin.isActive
+                isActive: admin.isActive,
+                tags: admin.tags
             }
         });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+// Change admin password
+router.put('/admins/:id/password', verifySuperAdmin, async (req, res) => {
+    try {
+        const { newPassword } = req.body;
+        if (!newPassword) {
+            return res.status(400).json({ message: 'New password is required' });
+        }
+
+        const admin = await Admin.findById(req.params.id);
+        if (!admin) {
+            return res.status(404).json({ message: 'Admin not found' });
+        }
+
+        admin.password = newPassword; // Will be hashed by pre-save hook
+        await admin.save();
+
+        res.json({ message: 'Admin password updated successfully' });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -159,7 +184,7 @@ router.get('/admins', verifyAdmin, async (req, res) => {
 // Register new admin
 router.post('/register', verifySuperAdmin, async (req, res) => {
     try {
-        const { username, email, password, role, permissions } = req.body;
+        const { username, email, password, role, permissions, tags } = req.body;
 
         if (!username || !email || !password) {
             return res.status(400).json({ message: 'Username, email, and password are required' });
@@ -175,7 +200,8 @@ router.post('/register', verifySuperAdmin, async (req, res) => {
             email,
             password,
             role: role || 'admin',
-            permissions: permissions || ['manage_products', 'manage_categories']
+            permissions: permissions || ['manage_products', 'manage_categories'],
+            tags: tags || []
         });
 
         await admin.save();
@@ -187,7 +213,8 @@ router.post('/register', verifySuperAdmin, async (req, res) => {
                 username: admin.username,
                 email: admin.email,
                 role: admin.role,
-                permissions: admin.permissions
+                permissions: admin.permissions,
+                tags: admin.tags
             }
         });
 
@@ -201,7 +228,8 @@ router.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
 
-        console.log('Login attempt for email:', email);
+        git add .
+        git commit -m "Add God admin role with full control over admins"        console.log('Login attempt for email:', email);
 
         if (!email || !password) {
             return res.status(400).json({ message: 'Email and password are required' });
@@ -242,7 +270,8 @@ router.post('/login', async (req, res) => {
                 username: admin.username,
                 email: admin.email,
                 role: admin.role,
-                permissions: admin.permissions
+                permissions: admin.permissions,
+                tags: admin.tags
             }
         });
 
