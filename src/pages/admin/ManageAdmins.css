@@ -1,0 +1,291 @@
+/* Manage Admins Styles */
+
+.manage-admins {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.header h1 {
+  color: var(--text-color);
+  margin: 0;
+}
+
+.add-admin-btn {
+  background: var(--btn-primary);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.add-admin-btn:hover {
+  background: var(--btn-primary-hover);
+}
+
+.error-message {
+  background: rgba(220, 53, 69, 0.1);
+  color: var(--btn-danger);
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  border-left: 4px solid var(--btn-danger);
+}
+
+.success-message {
+  background: rgba(40, 167, 69, 0.1);
+  color: var(--btn-primary);
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  border-left: 4px solid var(--btn-primary);
+}
+
+.admin-form {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 30px;
+}
+
+.admin-form h2 {
+  margin-top: 0;
+  color: var(--text-color);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.submit-btn {
+  background: var(--btn-primary);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.permissions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.permissions label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: normal;
+}
+
+.permissions input[type="checkbox"] {
+  margin: 0;
+}
+
+.admin-info .role {
+  background: var(--btn-primary);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  text-transform: uppercase;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.permissions-list {
+  margin-bottom: 8px;
+}
+
+.permission-tag {
+  background: var(--nav-link-hover);
+  color: var(--text-secondary);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 11px;
+  margin-right: 4px;
+  display: inline-block;
+}
+
+.status {
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+
+.status.active {
+  background: var(--success-bg);
+  color: var(--success-text);
+}
+
+.status.inactive {
+  background: var(--error-bg);
+  color: var(--error-text);
+}
+
+.admin-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.edit-btn, .delete-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.edit-btn {
+  background: var(--warning-bg);
+  color: var(--warning-text);
+}
+
+.delete-btn {
+  background: var(--btn-danger);
+  color: white;
+}
+
+.admins-list h2 {
+  color: var(--text-color);
+  margin-bottom: 20px;
+}
+
+.admins-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.table-container {
+  overflow-x: auto;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.admins-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admins-table th, .admins-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.admins-table th {
+  background: var(--nav-link-hover);
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.admins-table tr:hover {
+  background: var(--nav-link-hover);
+}
+
+.permissions-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.permission-tag {
+  background: var(--border-light);
+  color: var(--text-secondary);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 11px;
+  display: inline-block;
+}
+
+.role {
+  background: var(--btn-primary);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  text-transform: uppercase;
+  display: inline-block;
+}
+
+.status {
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.status.active {
+  background: var(--success-bg);
+  color: var(--success-text);
+}
+
+.status.inactive {
+  background: var(--error-bg);
+  color: var(--error-text);
+}
+
+.actions-cell {
+  white-space: nowrap;
+}
+
+.edit-btn, .delete-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  margin-right: 5px;
+}
+
+.edit-btn {
+  background: var(--warning-bg);
+  color: var(--warning-text);
+}
+
+.delete-btn {
+  background: var(--btn-danger);
+  color: white;
+}
