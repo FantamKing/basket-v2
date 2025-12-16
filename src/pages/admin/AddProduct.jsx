@@ -14,10 +14,10 @@ const FormContainer = styled.div`
 
 const FormTitle = styled.h2`
   font-size: 24px;
-  color: #333;
+  color: var(--text-color);
   margin-bottom: 30px;
   padding-bottom: 15px;
-  border-bottom: 2px solid #f0f0f0;
+  border-bottom: 2px solid var(--border-light);
 `;
 
 const Form = styled.form`
@@ -35,26 +35,26 @@ const FormGroup = styled.div`
 const Label = styled.label`
   display: block;
   margin-bottom: 8px;
-  color: #555;
+  color: var(--text-secondary);
   font-weight: 500;
   
   &.required::after {
     content: ' *';
-    color: #dc3545;
+    color: var(--btn-danger);
   }
 `;
 
 const Input = styled.input`
   width: 100%;
   padding: 12px 15px;
-  border: 2px solid #ddd;
+  border: 2px solid var(--border-color);
   border-radius: 8px;
   font-size: 16px;
   transition: all 0.3s;
   
   &:focus {
     outline: none;
-    border-color: #28a745;
+    border-color: var(--input-focus-border);
     box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
   }
 `;
@@ -62,15 +62,15 @@ const Input = styled.input`
 const Select = styled.select`
   width: 100%;
   padding: 12px 15px;
-  border: 2px solid #ddd;
+  border: 2px solid var(--border-color);
   border-radius: 8px;
   font-size: 16px;
-  background: white;
+  background: var(--input-bg);
   transition: all 0.3s;
   
   &:focus {
     outline: none;
-    border-color: #28a745;
+    border-color: var(--input-focus-border);
     box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
   }
 `;
@@ -78,7 +78,7 @@ const Select = styled.select`
 const TextArea = styled.textarea`
   width: 100%;
   padding: 12px 15px;
-  border: 2px solid #ddd;
+  border: 2px solid var(--border-color);
   border-radius: 8px;
   font-size: 16px;
   min-height: 100px;
@@ -87,7 +87,7 @@ const TextArea = styled.textarea`
   
   &:focus {
     outline: none;
-    border-color: #28a745;
+    border-color: var(--input-focus-border);
     box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
   }
 `;
@@ -105,7 +105,7 @@ const Checkbox = styled.input`
 `;
 
 const ImageUpload = styled.div`
-  border: 2px dashed #ddd;
+  border: 2px dashed var(--border-color);
   border-radius: 8px;
   padding: 30px;
   text-align: center;
@@ -113,7 +113,7 @@ const ImageUpload = styled.div`
   transition: all 0.3s;
   
   &:hover {
-    border-color: #28a745;
+    border-color: var(--input-focus-border);
     background-color: rgba(40, 167, 69, 0.05);
   }
   
@@ -134,13 +134,13 @@ const ImagePreview = styled.div`
 
 const UploadIcon = styled.div`
   font-size: 48px;
-  color: #28a745;
+  color: var(--btn-primary);
   margin-bottom: 15px;
 `;
 
 const SubmitButton = styled.button`
   padding: 15px 30px;
-  background-color: #28a745;
+  background-color: var(--btn-primary);
   color: white;
   border: none;
   border-radius: 8px;
@@ -151,11 +151,11 @@ const SubmitButton = styled.button`
   margin-top: 20px;
   
   &:hover {
-    background-color: #218838;
+    background-color: var(--btn-primary-hover);
   }
   
   &:disabled {
-    background-color: #6c757d;
+    background-color: var(--btn-secondary);
     cursor: not-allowed;
   }
 `;

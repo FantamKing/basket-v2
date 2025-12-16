@@ -15,10 +15,10 @@ const Section = styled.section`
 
 const SectionTitle = styled.h3`
   font-size: 20px;
-  color: #333;
+  color: var(--text-color);
   margin-bottom: 20px;
   padding-bottom: 10px;
-  border-bottom: 2px solid #f0f0f0;
+  border-bottom: 2px solid var(--border-light);
 `;
 
 const UserTable = styled.table`
@@ -28,19 +28,19 @@ const UserTable = styled.table`
   th {
     text-align: left;
     padding: 12px 15px;
-    background-color: #f8f9fa;
-    color: #333;
+    background-color: var(--nav-link-hover);
+    color: var(--text-color);
     font-weight: 600;
-    border-bottom: 2px solid #dee2e6;
+    border-bottom: 2px solid var(--border-color);
   }
 
   td {
     padding: 12px 15px;
-    border-bottom: 1px solid #dee2e6;
+    border-bottom: 1px solid var(--border-color);
   }
 
   tr:hover {
-    background-color: #f8f9fa;
+    background-color: var(--nav-link-hover);
   }
 `;
 
@@ -54,20 +54,20 @@ const ActionButton = styled.button`
   margin-right: 5px;
 
   &.edit {
-    background-color: #ffc107;
-    color: #212529;
+    background-color: var(--warning-bg);
+    color: var(--warning-text);
 
     &:hover {
-      background-color: #e0a800;
+      background-color: var(--warning-bg);
     }
   }
 
   &.delete {
-    background-color: #dc3545;
+    background-color: var(--btn-danger);
     color: white;
 
     &:hover {
-      background-color: #c82333;
+      background-color: var(--btn-danger-hover);
     }
   }
 `;
@@ -94,33 +94,33 @@ const FormGroup = styled.div`
 const Label = styled.label`
   display: block;
   margin-bottom: 8px;
-  color: #555;
+  color: var(--text-secondary);
   font-weight: 500;
 
   &.required::after {
     content: ' *';
-    color: #dc3545;
+    color: var(--btn-danger);
   }
 `;
 
 const Input = styled.input`
   width: 100%;
   padding: 12px 15px;
-  border: 2px solid #ddd;
+  border: 2px solid var(--border-color);
   border-radius: 8px;
   font-size: 16px;
   transition: all 0.3s;
 
   &:focus {
     outline: none;
-    border-color: #28a745;
+    border-color: var(--input-focus-border);
     box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
   }
 `;
 
 const SubmitButton = styled.button`
   padding: 15px 30px;
-  background-color: #28a745;
+  background-color: var(--btn-primary);
   color: white;
   border: none;
   border-radius: 8px;
@@ -131,18 +131,18 @@ const SubmitButton = styled.button`
   margin-top: 20px;
 
   &:hover {
-    background-color: #218838;
+    background-color: var(--btn-primary-hover);
   }
 
   &:disabled {
-    background-color: #6c757d;
+    background-color: var(--btn-secondary);
     cursor: not-allowed;
   }
 `;
 
 const CancelButton = styled.button`
   padding: 15px 30px;
-  background-color: #6c757d;
+  background-color: var(--btn-secondary);
   color: white;
   border: none;
   border-radius: 8px;
@@ -154,7 +154,7 @@ const CancelButton = styled.button`
   margin-left: 10px;
 
   &:hover {
-    background-color: #5a6268;
+    background-color: var(--btn-secondary-hover);
   }
 `;
 
@@ -167,7 +167,7 @@ const SearchContainer = styled.div`
 
 const ClearButton = styled.button`
   padding: 12px 20px;
-  background-color: #6c757d;
+  background-color: var(--btn-secondary);
   color: white;
   border: none;
   border-radius: 8px;
@@ -177,7 +177,7 @@ const ClearButton = styled.button`
   transition: all 0.3s;
 
   &:hover {
-    background-color: #5a6268;
+    background-color: var(--btn-secondary-hover);
   }
 `;
 
@@ -314,8 +314,8 @@ const ManageUsers = () => {
       text: 'This action cannot be undone',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#dc3545',
-      cancelButtonColor: '#6c757d',
+      confirmButtonColor: 'var(--btn-danger)',
+      cancelButtonColor: 'var(--btn-secondary)',
       confirmButtonText: 'Delete'
     });
 

@@ -15,10 +15,10 @@ const Section = styled.section`
 
 const SectionTitle = styled.h3`
   font-size: 20px;
-  color: #333;
+  color: var(--text-color);
   margin-bottom: 20px;
   padding-bottom: 10px;
-  border-bottom: 2px solid #f0f0f0;
+  border-bottom: 2px solid var(--border-light);
 `;
 
 const OrdersTable = styled.table`
@@ -28,19 +28,19 @@ const OrdersTable = styled.table`
   th {
     text-align: left;
     padding: 12px 15px;
-    background-color: #f8f9fa;
-    color: #333;
+    background-color: var(--nav-link-hover);
+    color: var(--text-color);
     font-weight: 600;
-    border-bottom: 2px solid #dee2e6;
+    border-bottom: 2px solid var(--border-color);
   }
 
   td {
     padding: 12px 15px;
-    border-bottom: 1px solid #dee2e6;
+    border-bottom: 1px solid var(--border-color);
   }
 
   tr:hover {
-    background-color: #f8f9fa;
+    background-color: var(--nav-link-hover);
   }
 `;
 
@@ -54,29 +54,29 @@ const ActionButton = styled.button`
   margin-right: 5px;
 
   &.view {
-    background-color: #17a2b8;
-    color: white;
+    background-color: var(--info-bg);
+    color: var(--info-text);
 
     &:hover {
-      background-color: #138496;
+      background-color: var(--info-bg);
     }
   }
 
   &.edit {
-    background-color: #ffc107;
-    color: #212529;
+    background-color: var(--warning-bg);
+    color: var(--warning-text);
 
     &:hover {
-      background-color: #e0a800;
+      background-color: var(--warning-bg);
     }
   }
 
   &.delete {
-    background-color: #dc3545;
+    background-color: var(--btn-danger);
     color: white;
 
     &:hover {
-      background-color: #c82333;
+      background-color: var(--btn-danger-hover);
     }
   }
 `;
@@ -89,39 +89,39 @@ const StatusBadge = styled.span`
   text-transform: capitalize;
 
   &.pending {
-    background-color: #fff3cd;
-    color: #856404;
+    background-color: var(--warning-bg);
+    color: var(--warning-text);
   }
 
   &.confirmed {
-    background-color: #d1ecf1;
-    color: #0c5460;
+    background-color: var(--info-bg);
+    color: var(--info-text);
   }
 
   &.processing {
-    background-color: #d4edda;
-    color: #155724;
+    background-color: var(--success-bg);
+    color: var(--success-text);
   }
 
   &.shipped {
-    background-color: #cce5ff;
-    color: #004085;
+    background-color: var(--primary-light-bg);
+    color: var(--primary-light-text);
   }
 
   &.delivered {
-    background-color: #d4edda;
-    color: #155724;
+    background-color: var(--success-bg);
+    color: var(--success-text);
   }
 
   &.cancelled {
-    background-color: #f8d7da;
-    color: #721c24;
+    background-color: var(--error-bg);
+    color: var(--error-text);
   }
 `;
 
 const StatusSelect = styled.select`
   padding: 4px 8px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   border-radius: 4px;
   font-size: 12px;
 `;
@@ -183,8 +183,8 @@ const ManageOrders = () => {
       text: 'This action cannot be undone',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#dc3545',
-      cancelButtonColor: '#6c757d',
+      confirmButtonColor: 'var(--btn-danger)',
+      cancelButtonColor: 'var(--btn-secondary)',
       confirmButtonText: 'Delete'
     });
 

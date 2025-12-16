@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--gradient-primary);
   padding: 20px;
 }
 
@@ -37,7 +37,7 @@
 .admin-icon {
   width: 80px;
   height: 80px;
-  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  background: var(--btn-primary);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -48,7 +48,7 @@
 }
 
 .admin-logo h1 {
-  color: #28a745;
+  color: var(--btn-primary);
   margin: 0 0 10px 0;
   font-size: 32px;
 }
@@ -67,11 +67,11 @@
 }
 
 .error-message {
-  background-color: #f8d7da;
-  color: #721c24;
+  background-color: var(--error-bg);
+  color: var(--error-text);
   padding: 12px 15px;
   border-radius: 8px;
-  border-left: 4px solid #dc3545;
+  border-left: 4px solid var(--btn-danger);
   display: flex;
   align-items: center;
   gap: 10px;
@@ -103,7 +103,7 @@
 .form-group input[type="email"]:focus,
 .form-group input[type="password"]:focus {
   outline: none;
-  border-color: #28a745;
+  border-color: var(--input-focus-border);
   box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
 }
 
@@ -126,7 +126,7 @@
 }
 
 .forgot-password {
-  color: #28a745;
+  color: var(--btn-primary);
   text-decoration: none;
 }
 
@@ -137,7 +137,7 @@
 .login-btn {
   width: 100%;
   padding: 15px;
-  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  background: var(--btn-primary);
   color: white;
   border: none;
   border-radius: 8px;
@@ -164,9 +164,9 @@
 .login-note {
   margin-top: 20px;
   padding: 12px;
-  background-color: #e9ecef;
+  background-color: var(--nav-link-hover);
   border-radius: 8px;
-  color: #666;
+  color: var(--text-secondary);
   font-size: 12px;
   display: flex;
   align-items: center;
@@ -179,7 +179,7 @@
 }
 
 .back-to-store a {
-  color: #666;
+  color: var(--text-secondary);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
@@ -188,5 +188,5 @@
 }
 
 .back-to-store a:hover {
-  color: #28a745;
+  color: var(--btn-primary);
 }

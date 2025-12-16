@@ -12,7 +12,7 @@ const CartContainer = styled.div`
 const CartTitle = styled.h1`
   font-size: 36px;
   margin-bottom: 30px;
-  color: #333;
+  color: var(--text-color);
 `;
 
 const CartContent = styled.div`
@@ -38,7 +38,7 @@ const CartItem = styled.div`
   gap: 20px;
   align-items: center;
   padding: 20px 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--border-light);
   
   @media (max-width: 768px) {
     grid-template-columns: 80px 1fr;
@@ -68,11 +68,11 @@ const ItemDetails = styled.div`
 const ItemName = styled.h3`
   font-size: 18px;
   margin-bottom: 5px;
-  color: #333;
+  color: var(--text-color);
 `;
 
 const ItemPrice = styled.p`
-  color: #28a745;
+  color: var(--btn-primary);
   font-weight: 500;
   
   &::before {
@@ -93,8 +93,8 @@ const QuantityControl = styled.div`
 const QuantityButton = styled.button`
   width: 30px;
   height: 30px;
-  border: 1px solid #ddd;
-  background: white;
+  border: 1px solid var(--border-color);
+  background: var(--card-bg);
   border-radius: 5px;
   font-size: 18px;
   display: flex;
@@ -102,32 +102,32 @@ const QuantityButton = styled.button`
   justify-content: center;
   
   &:hover {
-    background-color: #f8f9fa;
+    background-color: var(--nav-link-hover);
   }
 `;
 
 const QuantityInput = styled.input`
   width: 50px;
   text-align: center;
-  border: 1px solid #ddd;
+  border: 1px solid var(--border-color);
   border-radius: 5px;
   padding: 5px;
   
   &:focus {
     outline: none;
-    border-color: #28a745;
+    border-color: var(--input-focus-border);
   }
 `;
 
 const RemoveButton = styled.button`
   background: none;
   border: none;
-  color: #dc3545;
+  color: var(--btn-danger);
   font-size: 20px;
   cursor: pointer;
   
   &:hover {
-    color: #c82333;
+    color: var(--btn-danger-hover);
   }
   
   @media (max-width: 768px) {
@@ -149,7 +149,7 @@ const CartSummary = styled.div`
 const SummaryTitle = styled.h2`
   font-size: 24px;
   margin-bottom: 20px;
-  color: #333;
+  color: var(--text-color);
 `;
 
 const SummaryRow = styled.div`
@@ -157,18 +157,18 @@ const SummaryRow = styled.div`
   justify-content: space-between;
   margin-bottom: 15px;
   padding-bottom: 10px;
-  border-bottom: ${props => props.total ? '2px solid #333' : '1px solid #eee'};
+  border-bottom: ${props => props.total ? '2px solid var(--text-color)' : '1px solid var(--border-light)'};
   font-weight: ${props => props.total ? '600' : 'normal'};
 `;
 
 const EmptyCart = styled.div`
   text-align: center;
   padding: 50px;
-  color: #666;
+  color: var(--text-secondary);
   
   i {
     font-size: 60px;
-    color: #ddd;
+    color: var(--text-light);
     margin-bottom: 20px;
   }
   
@@ -185,7 +185,7 @@ const EmptyCart = styled.div`
 const CheckoutButton = styled.button`
   width: 100%;
   padding: 15px;
-  background-color: #28a745;
+  background-color: var(--btn-primary);
   color: white;
   border: none;
   border-radius: 5px;
@@ -194,14 +194,14 @@ const CheckoutButton = styled.button`
   margin-top: 20px;
   
   &:hover {
-    background-color: #218838;
+    background-color: var(--btn-primary-hover);
   }
 `;
 
 const ContinueButton = styled.button`
   width: 100%;
   padding: 15px;
-  background-color: #6c757d;
+  background-color: var(--btn-secondary);
   color: white;
   border: none;
   border-radius: 5px;
@@ -210,7 +210,7 @@ const ContinueButton = styled.button`
   margin-top: 10px;
   
   &:hover {
-    background-color: #5a6268;
+    background-color: var(--btn-secondary-hover);
   }
 `;
 
@@ -262,8 +262,8 @@ const Cart = () => {
       `,
       icon: 'question',
       showCancelButton: true,
-      confirmButtonColor: '#28a745',
-      cancelButtonColor: '#6c757d',
+      confirmButtonColor: 'var(--btn-primary)',
+      cancelButtonColor: 'var(--btn-secondary)',
       confirmButtonText: 'Place Order',
       cancelButtonText: 'Cancel'
     });

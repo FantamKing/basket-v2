@@ -15,10 +15,10 @@ const Section = styled.section`
 
 const SectionTitle = styled.h3`
   font-size: 20px;
-  color: #333;
+  color: var(--text-color);
   margin-bottom: 20px;
   padding-bottom: 10px;
-  border-bottom: 2px solid #f0f0f0;
+  border-bottom: 2px solid var(--border-light);
 `;
 
 const CategoryTable = styled.table`
@@ -28,19 +28,19 @@ const CategoryTable = styled.table`
   th {
     text-align: left;
     padding: 12px 15px;
-    background-color: #f8f9fa;
-    color: #333;
+    background-color: var(--nav-link-hover);
+    color: var(--text-color);
     font-weight: 600;
-    border-bottom: 2px solid #dee2e6;
+    border-bottom: 2px solid var(--border-color);
   }
   
   td {
     padding: 12px 15px;
-    border-bottom: 1px solid #dee2e6;
+    border-bottom: 1px solid var(--border-color);
   }
   
   tr:hover {
-    background-color: #f8f9fa;
+    background-color: var(--nav-link-hover);
   }
 `;
 
@@ -54,29 +54,29 @@ const ActionButton = styled.button`
   margin-right: 5px;
   
   &.edit {
-    background-color: #ffc107;
-    color: #212529;
+    background-color: var(--warning-bg);
+    color: var(--warning-text);
     
     &:hover {
-      background-color: #e0a800;
+      background-color: var(--warning-bg);
     }
   }
   
   &.delete {
-    background-color: #dc3545;
+    background-color: var(--btn-danger);
     color: white;
     
     &:hover {
-      background-color: #c82333;
+      background-color: var(--btn-danger-hover);
     }
   }
   
   &.toggle {
-    background-color: ${props => props.active ? '#28a745' : '#6c757d'};
+    background-color: ${props => props.active ? 'var(--btn-primary)' : 'var(--btn-secondary)'};
     color: white;
     
     &:hover {
-      background-color: ${props => props.active ? '#218838' : '#5a6268'};
+      background-color: ${props => props.active ? 'var(--btn-primary-hover)' : 'var(--btn-secondary-hover)'};
     }
   }
 `;
@@ -103,26 +103,26 @@ const FormGroup = styled.div`
 const Label = styled.label`
   display: block;
   margin-bottom: 8px;
-  color: #555;
+  color: var(--text-secondary);
   font-weight: 500;
   
   &.required::after {
     content: ' *';
-    color: #dc3545;
+    color: var(--btn-danger);
   }
 `;
 
 const Input = styled.input`
   width: 100%;
   padding: 12px 15px;
-  border: 2px solid #ddd;
+  border: 2px solid var(--border-color);
   border-radius: 8px;
   font-size: 16px;
   transition: all 0.3s;
   
   &:focus {
     outline: none;
-    border-color: #28a745;
+    border-color: var(--input-focus-border);
     box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
   }
 `;
@@ -130,7 +130,7 @@ const Input = styled.input`
 const TextArea = styled.textarea`
   width: 100%;
   padding: 12px 15px;
-  border: 2px solid #ddd;
+  border: 2px solid var(--border-color);
   border-radius: 8px;
   font-size: 16px;
   min-height: 100px;
@@ -139,13 +139,13 @@ const TextArea = styled.textarea`
   
   &:focus {
     outline: none;
-    border-color: #28a745;
+    border-color: var(--input-focus-border);
     box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
   }
 `;
 
 const ImageUpload = styled.div`
-  border: 2px dashed #ddd;
+  border: 2px dashed var(--border-color);
   border-radius: 8px;
   padding: 30px;
   text-align: center;
@@ -153,7 +153,7 @@ const ImageUpload = styled.div`
   transition: all 0.3s;
   
   &:hover {
-    border-color: #28a745;
+    border-color: var(--input-focus-border);
     background-color: rgba(40, 167, 69, 0.05);
   }
   
@@ -174,13 +174,13 @@ const ImagePreview = styled.div`
 
 const UploadIcon = styled.div`
   font-size: 48px;
-  color: #28a745;
+  color: var(--btn-primary);
   margin-bottom: 15px;
 `;
 
 const SubmitButton = styled.button`
   padding: 15px 30px;
-  background-color: #28a745;
+  background-color: var(--btn-primary);
   color: white;
   border: none;
   border-radius: 8px;
@@ -191,11 +191,11 @@ const SubmitButton = styled.button`
   margin-top: 20px;
   
   &:hover {
-    background-color: #218838;
+    background-color: var(--btn-primary-hover);
   }
   
   &:disabled {
-    background-color: #6c757d;
+    background-color: var(--btn-secondary);
     cursor: not-allowed;
   }
 `;
@@ -341,8 +341,8 @@ const ManageCategories = () => {
       text: `Are you sure you want to delete "${categoryName}"?`,
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#dc3545',
-      cancelButtonColor: '#6c757d',
+      confirmButtonColor: 'var(--btn-danger)',
+      cancelButtonColor: 'var(--btn-secondary)',
       confirmButtonText: 'Yes, delete it!',
       cancelButtonText: 'Cancel'
     });
@@ -494,8 +494,8 @@ const ManageCategories = () => {
                   style={{
                     padding: '15px 30px',
                     background: 'none',
-                    border: '2px solid #6c757d',
-                    color: '#6c757d',
+                    border: '2px solid var(--btn-secondary)',
+                    color: 'var(--btn-secondary)',
                     borderRadius: '8px',
                     fontSize: '18px',
                     fontWeight: '500',
@@ -529,7 +529,7 @@ const ManageCategories = () => {
                 <td>{category.description || '-'}</td>
                 <td>
                   <span style={{ 
-                    color: category.isActive ? '#28a745' : '#dc3545',
+                    color: category.isActive ? 'var(--btn-primary)' : 'var(--btn-danger)',
                     fontWeight: '500'
                   }}>
                     {category.isActive ? 'Active' : 'Inactive'}

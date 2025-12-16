@@ -154,8 +154,8 @@ const ManageProducts = () => {
       text: 'This action cannot be undone!',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#dc3545',
-      cancelButtonColor: '#6c757d',
+      confirmButtonColor: 'var(--btn-danger)',
+      cancelButtonColor: 'var(--btn-secondary)',
       confirmButtonText: 'Yes, delete it!'
     });
 
